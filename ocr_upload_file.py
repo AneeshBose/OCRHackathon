@@ -10,22 +10,28 @@ from io import BytesIO
 import pickle
 from PIL import Image
 
-
+# Upload a pdf
 # image_path = 'Aneesh_1'
 # image_pdf = image_path + '.pdf'
 # file_in_bytes = open(image_pdf, "rb").read()
 
+
+# Upload a jpg
 image_path = 'Sample_1'
-image_jpg = image_path + '.jpg'
+image_jpg = image_path + '.jpg' 
 
 output_path = image_path + 'b'
 output_jpg = output_path + '.jpg'
 
-
+# Resize the image to standard A4 size (1240,1754)
 image = Image.open(image_jpg)
 image = image.resize((1240,1754))
+
+# Save the resized image to read again in bytes
 image2 = image.save(output_jpg)
 
+
+# Read the resized image in bytes
 file_in_bytes = open(output_jpg, "rb").read()
 
 
@@ -67,9 +73,13 @@ while (poll):
         poll = False
     if ("status" in analysis and analysis['status'] == 'failed'):
         poll = False
+
+# Save the response from API to a json file
 out_file = output_path + '.json'
 _ = open(out_file, "w").write(write_data)
 
+
+# Display the recognized texts inside polygons
 polygons = []
 if ("analyzeResult" in analysis):
     # Extract the recognized text, with bounding boxes.
