@@ -3,7 +3,7 @@ import json
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 
-filename = 'Sample_1b'
+filename = 'Reference_bb'
 filename_json = filename + '.json'
 filename_jpg = filename + '.jpg'
 
@@ -20,7 +20,7 @@ if ("analyzeResult" in analysis):
 
 
 for polygon in polygons:
-	print("Text is ",polygon[1])
+	print("LineText is: ",polygon[1])
 
 # Display the image and overlay it with the extracted text.
 # image = Image.open(BytesIO(requests.get(image_url).content))
