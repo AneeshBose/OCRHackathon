@@ -3,7 +3,7 @@ import json
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 
-filename = '2'
+filename = 'Sample_1b'
 filename_json = filename + '.json'
 filename_jpg = filename + '.jpg'
 
@@ -34,5 +34,4 @@ for polygon in polygons:
     ax.axes.add_patch(patch)
     # plt.text(vertices[0][0], vertices[0][1], text, fontsize=20, va="top")
 plt.show()
-plt.savefig('sample_1.pdf')
 

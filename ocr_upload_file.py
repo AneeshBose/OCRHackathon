@@ -15,16 +15,18 @@ from PIL import Image
 # image_pdf = image_path + '.pdf'
 # file_in_bytes = open(image_pdf, "rb").read()
 
-image_path = '1'
+image_path = 'Sample_1'
 image_jpg = image_path + '.jpg'
 
+output_path = image_path + 'b'
+output_jpg = output_path + '.jpg'
 
 
 image = Image.open(image_jpg)
 image = image.resize((1240,1754))
-image2 = image.save('Sample_1b.jpg')
+image2 = image.save(output_jpg)
 
-file_in_bytes = open('Sample_1b.jpg', "rb").read()
+file_in_bytes = open(output_jpg, "rb").read()
 
 
 missing_env = False
@@ -65,7 +67,7 @@ while (poll):
         poll = False
     if ("status" in analysis and analysis['status'] == 'failed'):
         poll = False
-out_file = image_path+'.json'
+out_file = output_path + '.json'
 _ = open(out_file, "w").write(write_data)
 
 polygons = []
