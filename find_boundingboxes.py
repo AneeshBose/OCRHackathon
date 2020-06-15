@@ -20,7 +20,7 @@ if ("analyzeResult" in analysis):
 
 
 for polygon in polygons:
-	print(polygon[1])
+	print("Text is ",polygon[1])
 
 # Display the image and overlay it with the extracted text.
 # image = Image.open(BytesIO(requests.get(image_url).content))
