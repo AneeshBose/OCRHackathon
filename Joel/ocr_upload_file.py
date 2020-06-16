@@ -17,7 +17,7 @@ from PIL import Image
 
 
 # Upload a jpg
-image_path = 'Sample_1'
+image_path = '1'
 image_jpg = image_path + '.jpg' 
 
 output_path = image_path + 'b'
@@ -88,7 +88,7 @@ if ("analyzeResult" in analysis):
 
 # Display the image and overlay it with the extracted text.
 # image = Image.open(BytesIO(requests.get(image_url).content))
-image = Image.open('Sample_1b.jpg')
+image = Image.open(output_jpg)
 ax = plt.imshow(image)
 for polygon in polygons:
     vertices = [(polygon[0][i], polygon[0][i+1])

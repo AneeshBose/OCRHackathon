@@ -3,7 +3,7 @@ import json
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 
-filename = 'Reference_bb'
+filename = 'Aneesh_1-2b'
 filename_json = filename + '.json'
 filename_jpg = filename + '.jpg'
 
@@ -40,5 +40,5 @@ for polygon in polygons:
     # plt.text(vertices[0][0], vertices[0][1], text, fontsize=20, va="top")
 plt.show()
 
-print(other_texts)
+# print(other_texts)
 
