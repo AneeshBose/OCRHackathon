@@ -27,15 +27,38 @@ for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]
 		bounding_box_points = [x1 + x2 for (x1,x2) in zip(line['boundingBox'],target_offsets[csz_key])]
 		target_bounding_boxes[csz_key] = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
 
-	elif line['text'] in target_fields:
-		bounding_box_points = [x1 + x2 for (x1,x2) in zip(line['boundingBox'],target_offsets[line['text']])]
-		target_bounding_boxes[line['text']] = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
-
 	elif line['text'] in other_texts:
 		pass
 
+	# # Option A
+	# elif line['text'] in target_fields:
+
+	# 	bounding_box_points = [x1 + x2 for (x1,x2) in zip(line['boundingBox'],target_offsets[line['text']])]
+	# 	target_bounding_boxes[line['text']] = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
+
+
+	# else:
+	# 	print("Handwritten text:", line['text'])
+	# 	handwritten_texts[line['text']] = handwritten_texts[line['boundingBox']]
+
+	# Option B 
 	else:
-		handwritten_texts[line['text']] = handwritten_texts[line['boundingBox']]
+		flag = 0
+		for field in target_fields:
+			if line['text'].startswith(field):
+				print(field)
+				bounding_box_points = [x1 + x2 for (x1,x2) in zip(line['boundingBox'],target_offsets[line['text']])]
+				target_bounding_boxes[field] = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
+				flag = 1
+				break
+
+		if flag == 0:
+			print("Handwritten text:", line['text'])
+			handwritten_texts[line['text']] = handwritten_texts[line['boundingBox']]
+
+
+
+
 
 
 for handwritten_text in handwritten_texts:
