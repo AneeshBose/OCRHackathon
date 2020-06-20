@@ -94,24 +94,6 @@ for polygon2 in vertices_handwritten:
 
 plt.show()
 
-# #Option A
-# for handwritten_text in handwritten_texts:
-# 	print(handwritten_text)
-# 	polygon_htext = Polygon(handwritten_texts[handwritten_text])
-# 	for target_field in target_bounding_boxes:
-# 		polygon_ptext = Polygon(target_bounding_boxes[target_field])
-
-# 		if polygon_ptext.contains(polygon_htext) == True:
-# 			field_mappings[target_field] = handwritten_text
-# 			print("Target Field",target_field)
-# 			print("Handwritten text",handwritten_text)
-# 			break
-# 		else:
-# 			print("FAIL")
-# print(field_mappings)
-# print(len(field_mappings))
-
-# print(target_bounding_boxes)
 # #Option B
 for index, line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]):
 	bounding_coord = [(line['boundingBox'][i], line['boundingBox'][i + 1]) for i in
