@@ -10,29 +10,28 @@ from io import BytesIO
 import pickle
 from PIL import Image
 
-# Upload a pdf
+# # Upload a pdf
 # image_path = 'Aneesh_1'
 # image_pdf = image_path + '.pdf'
 # file_in_bytes = open(image_pdf, "rb").read()
-
+# output_path = image_path
 
 # Upload a jpg
-image_path = '1'
+image_path = 'Aneesh_1-2'
 image_jpg = image_path + '.jpg' 
-
 output_path = image_path + 'b'
 output_jpg = output_path + '.jpg'
 
 # Resize the image to standard A4 size (1240,1754)
 image = Image.open(image_jpg)
 image = image.resize((1240,1754))
-
 # Save the resized image to read again in bytes
 image2 = image.save(output_jpg)
 
 
 # Read the resized image in bytes
 file_in_bytes = open(output_jpg, "rb").read()
+
 
 
 missing_env = False

@@ -3,7 +3,7 @@ import json
 import matplotlib.pyplot as plt
 from matplotlib.patches import Polygon
 
-filename = 'Aneesh_1-2b'
+filename = 'Sample_1b'
 filename_json = filename + '.json'
 filename_jpg = filename + '.jpg'
 
