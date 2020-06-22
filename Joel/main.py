@@ -12,7 +12,7 @@ target_bounding_boxes = {}
 handwritten_texts = {}
 
 
-filename = 'Aneesh_2_p0b'
+filename = 'Aneesh_1-2b'
 filename_jpg = filename + '.jpg'
 filename_json = filename + '.json'
 file_json = open(filename_json,'r')
@@ -82,7 +82,7 @@ for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]
 for i in target_fields:
 	if i not in target_bounding_boxes:
 		print(i)
-# print(target_bounding_boxes)
+print(target_bounding_boxes)
 
 field_mappings = {}
 shipping_add = []
@@ -93,65 +93,67 @@ bill_line_1 = []
 bill_line_2 = []
 
 for index, line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]):
-    bounding_coord = [(line['boundingBox'][i], line['boundingBox'][i + 1]) for i in range(0, len(line['boundingBox']), 2)]
-    # polygon_htext is response for each line in response
-    polygon_htext = Polygon(bounding_coord)
-    x1_coord = bounding_coord[0][0]
-    for target_field in target_bounding_boxes:
-        polygon_ptext = Polygon(target_bounding_boxes[target_field])
+	bounding_coord = [(line['boundingBox'][i], line['boundingBox'][i + 1]) for i in range(0, len(line['boundingBox']), 2)]
+	# polygon_htext is response for each line in response
+	polygon_htext = Polygon(bounding_coord)
+	x1_coord = bounding_coord[0][0]
+	for target_field in target_bounding_boxes:
+		polygon_ptext = Polygon(target_bounding_boxes[target_field])
 
-        if polygon_ptext.contains(polygon_htext) == True:
-            if 'Shipping Address' in target_field:
-                shipping_add.append((line['text'],[(line['boundingBox'][i],line['boundingBox'][i+1]) for i in range(0,len(line['boundingBox']),2)]))
-            elif 'Billing Address' in target_field:
-                billing_add.append((line['text'],[(line['boundingBox'][i],line['boundingBox'][i+1]) for i in range(0,len(line['boundingBox']),2)]))
-            else:
-                if target_field not in field_mappings:
-                    field_mappings[target_field] = [[line['text'], x1_coord]]
-                else:
-                    field_mappings[target_field] += [[line['text'], x1_coord]]
-                    field_mappings[target_field].sort(key=lambda x: x[1])
-                break
-        else:
-            pass
+		if polygon_ptext.contains(polygon_htext) == True:
+			print(line['text'])
+			print(target_field)
 
+			if 'Shipping Address' in target_field:
+				shipping_add.append((line['text'],[(line['boundingBox'][i],line['boundingBox'][i+1]) for i in range(0,len(line['boundingBox']),2)]))
+			elif 'Billing Address' in target_field:
+				billing_add.append((line['text'],[(line['boundingBox'][i],line['boundingBox'][i+1]) for i in range(0,len(line['boundingBox']),2)]))
+			else:
+				if target_field not in field_mappings:
+					field_mappings[target_field] = [[line['text'], x1_coord]]
+				else:
+					field_mappings[target_field] += [[line['text'], x1_coord]]
+					field_mappings[target_field].sort(key=lambda x: x[1])
+				break
+		else:
+			pass
 
 
 
 for pair in shipping_add:
-    if 'Shipping Address' in pair[0]:
-        baseline = max(pair[1][2][1],pair[1][3][1])
+	if 'Shipping Address' in pair[0]:
+		baseline = max(pair[1][2][1],pair[1][3][1])
 for pair in shipping_add:
-    if int((min(pair[1][0][1],pair[1][1][1]) + max(pair[1][2][1],pair[1][3][1]))/2) <= baseline:
-        ship_line_1.append(pair)
-    else:
-        ship_line_2.append(pair)
+	if int((min(pair[1][0][1],pair[1][1][1]) + max(pair[1][2][1],pair[1][3][1]))/2) <= baseline:
+		ship_line_1.append(pair)
+	else:
+		ship_line_2.append(pair)
 
 
 ship_add = ''
 ship_line_1.sort(key = lambda x:x[1][0][0])
 for pair in ship_line_1:
-    ship_add += pair[0]+' '
+	ship_add += pair[0]+' '
 ship_line_2.sort(key = lambda x:x[1][0][0])
 for pair in ship_line_2:
-    ship_add += pair[0]+' '
+	ship_add += pair[0]+' '
 field_mappings['Shipping Address'] = [[ship_add,0]]
 
 for pair in billing_add:
-    if 'Billing Address' in pair[0]:
-        baseline = max(pair[1][2][1],pair[1][3][1])
+	if 'Billing Address' in pair[0]:
+		baseline = max(pair[1][2][1],pair[1][3][1])
 for pair in billing_add:
-    if int((min(pair[1][0][1],pair[1][1][1]) + max(pair[1][2][1],pair[1][3][1]))/2) <= baseline:
-        bill_line_1.append(pair)
-    else:
-        bill_line_2.append(pair)
+	if int((min(pair[1][0][1],pair[1][1][1]) + max(pair[1][2][1],pair[1][3][1]))/2) <= baseline:
+		bill_line_1.append(pair)
+	else:
+		bill_line_2.append(pair)
 bill_add = ''
 bill_line_1.sort(key = lambda x:x[1][0][0])
 for pair in bill_line_1:
-    bill_add += pair[0]+' '
+	bill_add += pair[0]+' '
 bill_line_2.sort(key = lambda x:x[1][0][0])
 for pair in bill_line_2:
-    bill_add += pair[0]+' '
+	bill_add += pair[0]+' '
 bill_add = bill_add.replace('Same as Shipping ','')
 field_mappings['Billing Address'] = [[bill_add,0]]
 
@@ -233,17 +235,18 @@ if 'Patient Signature' in field_mappings:
 	left_text = field_mappings['Patient Signature']
 	key_field_index = left_text.lower().find('Date'.lower())
 	first_field = left_text[:key_field_index]
-	second_field = left_text[key_field_index + len('Last Name'):]
-	field_mappings['Patient Signature'], field_mappings['Date'] = first_field, second_field
-	field_mappings['Patient Signature'] = field_mappings['Patient Signature'].lstrip().rstrip()
+	second_field = left_text[key_field_index + len('Date'):]
+	field_mappings['Date'] = second_field
 	field_mappings['Date'] = field_mappings['Date'].lstrip().rstrip()
+	del field_mappings['Patient Signature']
 
 if 'DOB (m' in field_mappings:
 	left_text = field_mappings['DOB (m']
 	key_field_index = left_text.lower().find('Sex'.lower())
 	first_field = left_text[:key_field_index]
-	field_mappings['DOB (m'] = first_field
-	field_mappings['DOB (m'] = field_mappings['DOB (m'].lstrip().rstrip()
+	field_mappings['DOB (mm/dd/yyyy)'] = first_field
+	field_mappings['DOB (mm/dd/yyyy)'] = field_mappings['DOB (mm/dd/yyyy)'].lstrip().rstrip()
+	del field_mappings['DOB (m']
 
 print(field_mappings)
 print(len(field_mappings))
