@@ -1,6 +1,6 @@
 from shapely.geometry import Polygon
 from PIL import Image
-import json 
+import json
 import matplotlib.pyplot as plt
 import matplotlib
 
@@ -34,7 +34,7 @@ def calculate_bounding_box(inputBox,offset):
 	bounding_box.append(inputBox[0] + 1 + offset[2])
 	bounding_box.append(inputBox[3] + offset[3])
 	bounding_box.append(inputBox[0] + 1 + offset[4])
-	bounding_box.append(inputBox[5] + offset[5])	
+	bounding_box.append(inputBox[5] + offset[5])
 	bounding_box.append(inputBox[6] + offset[6])
 	bounding_box.append(inputBox[7] + offset[7])
 	return(bounding_box)
@@ -111,7 +111,7 @@ for index, line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"
                 break
         else:
             pass
-                    
+
 for pair in shipping_add:
     if 'Shipping Address' in pair[0]:
         baseline = max(pair[1][2][1],pair[1][3][1])
@@ -121,7 +121,7 @@ for pair in shipping_add:
     else:
         ship_line_2.append(pair)
 
-        
+
 ship_add = ''
 ship_line_1.sort(key = lambda x:x[1][0][0])
 for pair in ship_line_1:
@@ -169,8 +169,76 @@ for key_field in field_mappings:
 
 	underscore_prep = key_field_prep.replace('_', '')
 	colon_prep = underscore_prep.replace(':', '')
-	final_prep = (colon_prep.lstrip()).rstrip()
+	dot_prep = colon_prep.lstrip('.')
+	dot_prep = dot_prep.rstrip('.')
+	final_prep = (dot_prep.lstrip()).rstrip()
 	field_mappings[key_field] = final_prep
+
+if 'Policyholder Name' in field_mappings:
+	left_text = field_mappings['Policyholder Name']
+	key_field_index = left_text.lower().find('Policyholder DOB'.lower())
+	first_field = left_text[:key_field_index]
+	second_field = left_text[key_field_index + len('Policyholder DOB'):]
+	field_mappings['Policyholder Name'], field_mappings['Policyholder DOB'] = first_field, second_field
+	field_mappings['Policyholder Name'] = field_mappings['Policyholder Name'].lstrip().rstrip()
+
+	key_field_index = field_mappings['Policyholder DOB'].lower().find('Relationship'.lower())
+	field_mappings['Policyholder DOB'] = field_mappings['Policyholder DOB'][:key_field_index]
+	field_mappings['Policyholder DOB'] = field_mappings['Policyholder DOB'].lstrip().rstrip()
+
+if 'First Name' in field_mappings:
+	left_text = field_mappings['First Name']
+	key_field_index = left_text.lower().find('Last Name'.lower())
+	first_field = left_text[:key_field_index]
+	second_field = left_text[key_field_index + len('Last Name'):]
+	field_mappings['First Name'], field_mappings['Last Name'] = first_field, second_field
+	field_mappings['First Name'] = field_mappings['First Name'].lstrip().rstrip()
+	field_mappings['Last Name'] = field_mappings['Last Name'].lstrip().rstrip()
+
+if 'City, State, Zip2' in field_mappings:
+	left_text = field_mappings['City, State, Zip2']
+	key_field_index = left_text.lower().find('city, State, Zip'.lower())
+	first_field = left_text[:key_field_index]
+	second_field = left_text[key_field_index + len('city, State, Zip'):]
+	field_mappings['City, State, Zip2'], field_mappings['City, State, Zip3'] = first_field, second_field
+	field_mappings['City, State, Zip2'] = field_mappings['City, State, Zip2'].lstrip().rstrip()
+	field_mappings['City, State, Zip3'] = field_mappings['City, State, Zip3'].lstrip().rstrip()
+
+if 'Primary Insurance Carrier' in field_mappings:
+	left_text = field_mappings['Primary Insurance Carrier']
+	key_field_index = left_text.lower().find('Type'.lower())
+	first_field = left_text[:key_field_index]
+	field_mappings['Primary Insurance Carrier'] = first_field
+	field_mappings['Primary Insurance Carrier'] = field_mappings['Primary Insurance Carrier'].lstrip().rstrip()
+
+if 'Subscriber ID/Policy Number' in field_mappings:
+	left_text = field_mappings['Subscriber ID/Policy Number']
+	key_field_index1 = left_text.lower().find('Group Number'.lower())
+	key_field_index2 = left_text.lower().find('Plan'.lower())
+	first_field = left_text[:key_field_index1]
+	second_field = left_text[key_field_index1 + len('Group Number') :key_field_index2]
+	third_field = left_text[key_field_index2 + len('Plan'):]
+	field_mappings['Subscriber ID/Policy Number'], field_mappings['Group Number'], field_mappings['Plan'] = first_field, second_field, third_field
+	field_mappings['Subscriber ID/Policy Number'] = field_mappings['Subscriber ID/Policy Number'].lstrip().rstrip()
+	field_mappings['Group Number'] = field_mappings['Group Number'].lstrip().rstrip()
+	field_mappings['Plan'] = field_mappings['Plan'].lstrip().rstrip()
+
+if 'Patient Signature' in field_mappings:
+	left_text = field_mappings['Patient Signature']
+	key_field_index = left_text.lower().find('Date'.lower())
+	first_field = left_text[:key_field_index]
+	second_field = left_text[key_field_index + len('Last Name'):]
+	field_mappings['Patient Signature'], field_mappings['Date'] = first_field, second_field
+	field_mappings['Patient Signature'] = field_mappings['Patient Signature'].lstrip().rstrip()
+	field_mappings['Date'] = field_mappings['Date'].lstrip().rstrip()
+
+if 'DOB (mm/dd/yyyy)' in field_mappings:
+	left_text = field_mappings['DOB (mm/dd/yyyy)']
+	key_field_index = left_text.lower().find('Sex'.lower())
+	first_field = left_text[:key_field_index]
+	field_mappings['DOB (mm/dd/yyyy)'] = first_field
+	field_mappings['DOB (mm/dd/yyyy)'] = field_mappings['DOB (mm/dd/yyyy)'].lstrip().rstrip()
+
 print(field_mappings)
 print(len(field_mappings))
 
