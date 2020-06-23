@@ -5,13 +5,14 @@ import matplotlib.pyplot as plt
 import matplotlib
 from utils import char2num
 
+
+
 target_fields = ['Cologuard Order Number','Date Received by ES Labs',"Health Organization Name","Provider Name","Provider NPI", "Patient Name","Patient Date of Birth","Patient Sex","Patient Phone Number","Patient Shipping Address","Please Confirm Secure Fax #","Subscriber ID","Group Number","Policy Owner/Holder Name","Policy Owner/Holder Date of Birth"]
-special_target_fields = ["Insurance Type",'Insurance Carrier Name',"ICD-10 Codes Z12.11 and Z12.12"]
+special_target_fields = ["Insurance Type",'Insurance Carrier Name',"ICD-10 Codes"]
 
 
 other_texts = ['EXACT', 'COLOGUARD\u00ae ORDER', 'EXACT SCIENCES LABORATORIES, LLC', 'SCIENCES', '145 E Badger Rd, Ste 100. Madison, WI 53713', 'REQUISITION FORM', 'LABORATORIES', 'p: 844-870-8870 | ExactLabs.com', 'Stool-based ONA test with hemoglobin Immunoassay component', 'NPI: 1629407069 TIN: 463095174', 'Provider & Order Information,', 'PROVIDER INFORMATION', 'ORDER INFORMATION', 'This section is not intended to influence the medical judgment of an ordering', 'provider In determining whether this test is right for any particular patient. The', 'following codes are listed as a convenience. Ordering practitioners should report', 'the diagnosis code(s) that best describes the reason for performing the test.', 'ICD-10 Code:', 'Z12.11 and Z12.12 (Encounter for screening for malignant', 'neoplasm of colon [Z12.11] and rectum [212.12])', 'Certification', 'I am a licensed healthcare provider authorized to order Cologuard. This', 'test is medically necessary and the patient is eligible to use Cologuard.', 'will maintain the privacy of test results and related information as', 'required by HIPAA. I authorize Exact Sciences Laboratories to obtain', 'reimbursement for Cologuard and to directly contact and collect', 'additional samples from the patient as appropriate.', "'To receive results for this order, please provide secure FAX number only", 'Patient Demographics, Attacholc', 'PATIENT ETHNICITY AND RACE The completion of this section is optional.', "Please mark one or more to indicate your patient's race:", 'Patient Insurance/Billing Information.','PATIENT AUTHORIZATIONS, ASSIGNMENT OF BENEFITS (AOB) & FINANCIAL RESPONSIBILITIES', 'i authorize Exact Sciences Laboratories (Exact) to bill my insurance/health pion and furnish them with my Cologuard order information, test results, or other information requested', 'for reimbursement. I assign all rights and benefits under my insurance plans to Exoct ond authorize Exact to appeal and contest any reimbursement denial, including in any', 'administrative or civil proceedings necessary to pursue reimbursement, I authorize all reimbursements to be poid directly to the laboratory in consideration for services performed', 'I understand that i am responsible for any amount not paid, including amounts for non-covered services or services determined by my plon to be provided by an out-of-network', 'provider. I further understand that if I am a Medicard enrollee in a state where Exact is enrolled as a Medicaid provider, Exact will accept as payment in full the amounts paid by the', 'Medicaid progrom, plus ony deductible, cainsurance or copayment which may be required by the Medicaid program to be paid by me.', 'For Lab Use Only', 'FRM-3004-05-c', 'Fax completed form to 844-870-8875', 'February 2019', 'Sample Collected: _/ /_', 'Sample Received _/ /']
-
-target_offsets = {'ICD-10 Codes Z12.11 and Z12.12': [0, -18, 286, -18, 286, 118, 0, 118], 'Insurance Type': [0, -15, 160, -16, 160, 25, 0, 26], 'Insurance Carrier Name': [0, -13, 452, -14, 452, 26, 0, 27]}
+target_offsets = {'ICD-10 Codes': [0, -18, 286, -18, 286, 118, 0, 118], 'Insurance Type': [0, -15, 160, -16, 160, 25, 0, 26], 'Insurance Carrier Name': [0, -13, 452, -14, 452, 26, 0, 27]}
 
 target_bounding_boxes = {}
 
@@ -31,17 +32,15 @@ vertices_handwritten = []
 # Count each occurence of 'City, State, Zip'
 def calculate_bounding_box(inputBox,offset):
 	bounding_box = []
-	bounding_box.append(0)
+	bounding_box.append(offset[0])
 	bounding_box.append(inputBox[1] + offset[1])
 	bounding_box.append(1240)
 	bounding_box.append(inputBox[3] + offset[3])
 	bounding_box.append(1240)
 	bounding_box.append(inputBox[5] + offset[5])
-	bounding_box.append(0)
+	bounding_box.append(offset[6])
 	bounding_box.append(inputBox[7] + offset[7])
 	return(bounding_box)
-
-
 
 # Initialize target boxes
 csz_counter = 0
@@ -57,6 +56,8 @@ for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]
 	if flag == 0:
 		for field in special_target_fields:
 			if field.lower() in line['text'].lower() and field not in target_bounding_boxes:
+				target_offsets[field][0] = 450
+				target_offsets[field][6] = 450
 				bounding_box_points = calculate_bounding_box(line['boundingBox'],target_offsets[field])
 				target_bounding_boxes[field] = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
 				vertices.append([(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)])
