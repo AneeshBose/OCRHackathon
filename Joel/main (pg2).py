@@ -3,6 +3,7 @@ from PIL import Image
 import json
 import matplotlib.pyplot as plt
 import matplotlib
+from utils import char2num
 
 target_fields = ['Cologuard Order Number','Date Received by ES Labs',"Health Organization Name","Provider Name","Provider NPI", "Patient Name","Patient Date of Birth","Patient Sex","Patient Phone Number","Patient Shipping Address","Please Confirm Secure Fax #","Subscriber ID","Group Number","Policy Owner/Holder Name","Policy Owner/Holder Date of Birth"]
 special_target_fields = ["Insurance Type",'Insurance Carrier Name',"ICD-10 Codes Z12.11 and Z12.12"]
@@ -28,8 +29,6 @@ vertices = []
 vertices_handwritten = []
 
 # Count each occurence of 'City, State, Zip'
-csz_counter = 0
-
 def calculate_bounding_box(inputBox,offset):
 	bounding_box = []
 	bounding_box.append(0)
@@ -45,6 +44,7 @@ def calculate_bounding_box(inputBox,offset):
 
 
 # Initialize target boxes
+csz_counter = 0
 for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]):
 	flag = 0
 	for field in target_fields:
@@ -61,13 +61,8 @@ for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]
 				target_bounding_boxes[field] = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
 				vertices.append([(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)])
 
-
-for i in target_fields:
-	if i not in target_bounding_boxes:
-		print(i)
-
+print(target_bounding_boxes)
 field_mappings = {}
-
 
 for index, line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]):
 	bounding_coord = [(line['boundingBox'][i], line['boundingBox'][i + 1]) for i in range(0, len(line['boundingBox']), 2)]
@@ -114,6 +109,12 @@ for key_field in field_mappings:
 	field_mappings[key_field] = final_prep
 
 
+cases = ["DOB","Number","NPI","Date"]
+for key in field_mappings.keys():
+    for case in cases:
+        if case in key:
+            field_mappings[key] = char2num(field_mappings[key])
+            break
 print(field_mappings)
 print(len(field_mappings))
 
