@@ -3,6 +3,7 @@ from PIL import Image
 import json
 import matplotlib.pyplot as plt
 import matplotlib
+from utils import char2num
 
 target_fields = ['Healthcare Organization Name', 'Provider Name', 'NPI #', 'Other(s)', 'Location Address', 'City, State, Zip1', 'Phone Number', 'Secure Fax Number', 'Patient ID/MRN', 'Phone Number (required)', 'First Name', 'Language Preference (optional)', 'DOB (m', 'Shipping Address', 'Billing Address', 'City, State, Zip2', 'Policyholder Name', 'Primary Insurance Carrier', 'Claims Submission Address', 'Subscriber ID/Policy Number', 'Prior-Authorization Code (if available)', 'Patient Signature']
 other_texts = ['EXACT', 'COLOGUARD\u00ae ORDER', 'EXACT SCIENCES LABORATORIES, LLC', 'SCIENCES', '145 E Badger Rd, Ste 100. Madison, WI 53713', 'REQUISITION FORM', 'LABORATORIES', 'p: 844-870-8870 | ExactLabs.com', 'Stool-based ONA test with hemoglobin Immunoassay component', 'NPI: 1629407069 TIN: 463095174', 'Provider & Order Information,', 'PROVIDER INFORMATION', 'ORDER INFORMATION', 'This section is not intended to influence the medical judgment of an ordering', 'provider In determining whether this test is right for any particular patient. The', 'following codes are listed as a convenience. Ordering practitioners should report', 'the diagnosis code(s) that best describes the reason for performing the test.', 'ICD-10 Code:', 'Z12.11 and Z12.12 (Encounter for screening for malignant', 'neoplasm of colon [Z12.11] and rectum [212.12])', 'Certification', 'I am a licensed healthcare provider authorized to order Cologuard. This', 'test is medically necessary and the patient is eligible to use Cologuard.', 'will maintain the privacy of test results and related information as', 'required by HIPAA. I authorize Exact Sciences Laboratories to obtain', 'reimbursement for Cologuard and to directly contact and collect', 'additional samples from the patient as appropriate.', "'To receive results for this order, please provide secure FAX number only", 'Patient Demographics, Attacholc', 'PATIENT ETHNICITY AND RACE The completion of this section is optional.', "Please mark one or more to indicate your patient's race:", 'Patient Insurance/Billing Information.','PATIENT AUTHORIZATIONS, ASSIGNMENT OF BENEFITS (AOB) & FINANCIAL RESPONSIBILITIES', 'i authorize Exact Sciences Laboratories (Exact) to bill my insurance/health pion and furnish them with my Cologuard order information, test results, or other information requested', 'for reimbursement. I assign all rights and benefits under my insurance plans to Exoct ond authorize Exact to appeal and contest any reimbursement denial, including in any', 'administrative or civil proceedings necessary to pursue reimbursement, I authorize all reimbursements to be poid directly to the laboratory in consideration for services performed', 'I understand that i am responsible for any amount not paid, including amounts for non-covered services or services determined by my plon to be provided by an out-of-network', 'provider. I further understand that if I am a Medicard enrollee in a state where Exact is enrolled as a Medicaid provider, Exact will accept as payment in full the amounts paid by the', 'Medicaid progrom, plus ony deductible, cainsurance or copayment which may be required by the Medicaid program to be paid by me.', 'For Lab Use Only', 'FRM-3004-05-c', 'Fax completed form to 844-870-8875', 'February 2019', 'Sample Collected: _/ /_', 'Sample Received _/ /']
@@ -24,8 +25,6 @@ vertices = []
 vertices_handwritten = []
 
 # Count each occurence of 'City, State, Zip'
-csz_counter = 0
-
 def calculate_bounding_box(inputBox,offset):
 	bounding_box = []
 	bounding_box.append(inputBox[0] + offset[0])
@@ -38,7 +37,9 @@ def calculate_bounding_box(inputBox,offset):
 	bounding_box.append(inputBox[7] + offset[7])
 	return(bounding_box)
 
+
 # Initialize target boxes
+csz_counter = 0
 for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]):
 	if ('City, State, Zip').lower() in line['text'].lower():
 		if line['boundingBox'][0] < 120:
@@ -79,9 +80,6 @@ for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]
 			handwritten_box = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
 			vertices_handwritten.append(handwritten_box)
 
-for i in target_fields:
-	if i not in target_bounding_boxes:
-		print(i)
 print(target_bounding_boxes)
 
 field_mappings = {}
@@ -247,6 +245,13 @@ if 'DOB (m' in field_mappings:
 	field_mappings['DOB (mm/dd/yyyy)'] = first_field
 	field_mappings['DOB (mm/dd/yyyy)'] = field_mappings['DOB (mm/dd/yyyy)'].lstrip().rstrip()
 	del field_mappings['DOB (m']
+    
+cases = ["DOB","Number","NPI","Date"]
+for key in field_mappings.keys():
+    for case in cases:
+        if case in key:
+            field_mappings[key] = char2num(field_mappings[key])
+            break
 
 print(field_mappings)
 print(len(field_mappings))

@@ -3,6 +3,7 @@ from PIL import Image
 import json
 import matplotlib.pyplot as plt
 import matplotlib
+from utils import char2num
 
 
 
@@ -29,8 +30,6 @@ vertices = []
 vertices_handwritten = []
 
 # Count each occurence of 'City, State, Zip'
-csz_counter = 0
-
 def calculate_bounding_box(inputBox,offset):
 	bounding_box = []
 	bounding_box.append(offset[0])
@@ -44,6 +43,7 @@ def calculate_bounding_box(inputBox,offset):
 	return(bounding_box)
 
 # Initialize target boxes
+csz_counter = 0
 for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]):
 	flag = 0
 	for field in target_fields:
@@ -62,13 +62,8 @@ for index,line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]
 				target_bounding_boxes[field] = [(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)]
 				vertices.append([(bounding_box_points[i], bounding_box_points[i+1]) for i in range(0, len(bounding_box_points), 2)])
 
-
-for i in target_fields:
-	if i not in target_bounding_boxes:
-		print(i)
-
+print(target_bounding_boxes)
 field_mappings = {}
-
 
 for index, line in enumerate(analysis["analyzeResult"]["readResults"][0]["lines"]):
 	bounding_coord = [(line['boundingBox'][i], line['boundingBox'][i + 1]) for i in range(0, len(line['boundingBox']), 2)]
@@ -115,6 +110,12 @@ for key_field in field_mappings:
 	field_mappings[key_field] = final_prep
 
 
+cases = ["DOB","Number","NPI","Date"]
+for key in field_mappings.keys():
+    for case in cases:
+        if case in key:
+            field_mappings[key] = char2num(field_mappings[key])
+            break
 print(field_mappings)
 print(len(field_mappings))
 

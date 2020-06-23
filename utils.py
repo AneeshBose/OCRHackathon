@@ -31,3 +31,13 @@ def calculate_req_bounding_box(inputBox,offset):
     bounding_box.append(inputBox[6] + offset[6])
     bounding_box.append(inputBox[7] + offset[7])
     return bounding_box
+
+def char2num(raw_str):
+    processed_str = ''
+    char_num_dict = {'O':0 , 'D':0 , 'Q':0, 'I':1, 'J':1, 'L':1, 'Z':2, 'H':4, 'U':4, 'S':5, 'G':5, 'C':6, 'T':7, 'B':8, 'o':0, 'a':0, 'd':0, 'p':0, 'q':0, 'i':1, 'l':1, 'f':1, 'z':2, 'h':4, 'u':4, 'v':4, 's':5, 'c':6, 'b':6, 'g':9, 'j':9}
+    for char in raw_str:
+        if char in char_num_dict:
+            processed_str += str(char_num_dict[char])
+        else:
+            processed_str += char
+    return processed_str
