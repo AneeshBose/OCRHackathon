@@ -5,7 +5,7 @@ from PIL import Image
 import json
 import time
 from shapely.geometry import Polygon
-from utils import req_target_fields, req_other_texts, req_target_offsets, calculate_req_bounding_box
+from utils import req_target_fields, req_other_texts, req_target_offsets, calculate_req_bounding_box, char2num, firebase_keys
 
 
 def convert_pil_to_bytes(img):
@@ -251,7 +251,18 @@ def first_page(img):
 	            field_mappings[key] = char2num(field_mappings[key])
 	            break
 
-	            
+
+
+	for key in firebase_keys:
+		if key not in field_mappings:
+			field_mappings[firebase_keys[key]] = ''
+		else:
+			field_mappings[firebase_keys[key]] = field_mappings[key]
+			del field_mappings[key]
+	
+
+
+
 	return field_mappings
 
 
@@ -264,6 +275,6 @@ def convert_pdf(pdf_path):
 	images = convert_from_bytes(open(r'./'+pdf_path,'rb').read())
 	for i in range(len(images)):
 		images[i] = images[i].resize((1240, 1754), Image.ANTIALIAS)
-	first_out = first_page(images[1])
+	first_out = first_page(images[0])
 	# second_out = second_page(images[0])
-	return [first_out]
+	return first_out
