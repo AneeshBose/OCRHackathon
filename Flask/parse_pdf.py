@@ -346,7 +346,3 @@ def convert_pdf(pdf_path):
 	first_out = first_page(images[0])
 	second_out = second_page(images[1])
 	return first_out
-
-
-op = convert_pdf("C:\\Users\\rakes\Downloads\\test.pdf")
-print(op)
