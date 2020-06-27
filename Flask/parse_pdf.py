@@ -111,7 +111,11 @@ def first_page(img):
 	for pair in bill_line_2:
 		bill_add += pair[0] + ' '
 	bill_add = bill_add.replace('Same as Shipping ', '')
+	bill_add = bill_add.replace(']','').replace('[','')
+	
+
 	field_mappings['Billing Address'] = [[bill_add, 0]]
+
 
 	# 2 cases to handle for same as shipping case when Billing Address is empty!!!!
 	# print(field_mappings['Shipping Address'],field_mappings['Billing Address'])
@@ -124,7 +128,7 @@ def first_page(img):
 			key_field_index = row.lower().find('City, State, Zip'.lower())
 			key_field_len = len(key_field)
 			str_key_field = row[key_field_index:key_field_index + key_field_len]
-			key_field_prep = row.replace(str_key_field, '')
+			key_field_prep = row.replace(str_key_field, '',1)
 		else:
 			key_field_index = row.lower().find(key_field.lower())
 			key_field_len = len(key_field)
@@ -157,7 +161,7 @@ def first_page(img):
 		second_field = left_text[key_field_index + len('Last Name'):]
 		field_mappings['First Name'], field_mappings['Last Name'] = first_field, second_field
 		field_mappings['First Name'] = field_mappings['First Name'].lstrip().rstrip()
-		field_mappings['Last Name'] = field_mappings['Last Name'].lstrip().rstrip()
+		field_mappings['Last Name'] = field_mappingsShipping['Last Name'].lstrip().rstrip()
 
 	if 'City, State, Zip2' in field_mappings:
 		left_text = field_mappings['City, State, Zip2']
