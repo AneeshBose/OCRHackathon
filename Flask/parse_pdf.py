@@ -1,54 +1,16 @@
-import io
-import requests
 from pdf2image import convert_from_path, convert_from_bytes
 from PIL import Image
-import json
 import time
 from shapely.geometry import Polygon
-
 from utils import req_target_fields, req_other_texts, req_target_offsets, calculate_req_bounding_box
 from utils import info_target_fields, info_special_target_fields, info_other_texts, info_target_offsets, calculate_info_bounding_box
-from utils import char2num, firebase_keys
+from utils import execute_api, char2num, firebase_keys
 
-def convert_pil_to_bytes(img):
-	buf = io.BytesIO()
-	img.save(buf, format='PNG')
-	byte_im = buf.getvalue()
-	return byte_im
-
-
-def execute_api(byte_img):
-	endpoint = 'https://computervisionmedicalsciences.cognitiveservices.azure.com'
-	subscription_key = 'd0e3653430044e4c88cb7806a08041ce'
-
-	text_recognition_url = endpoint + "/vision/v3.0/read/analyze"
-
-	headers = {'Ocp-Apim-Subscription-Key': subscription_key, 'Content-Type': 'application/octet-stream'}
-	data = byte_img
-	response = requests.post(
-		text_recognition_url, headers=headers, json=None, data=data)
-	response.raise_for_status()
-	poll = True
-	resp_data = None
-	while poll:
-		response_final = requests.get(
-			response.headers["Operation-Location"], headers=headers)
-		analysis = response_final.json()
-
-		#print(json.dumps(analysis, indent=4))
-
-		resp_data = json.dumps(analysis, indent=4)
-
-		time.sleep(1)
-		if "analyzeResult" in analysis:
-			poll = False
-		if "status" in analysis and analysis['status'] == 'failed':
-			poll = False
-	return analysis
 
 
 def first_page(img):
-	byte_img = convert_pil_to_bytes(img)
+	byte_img = open(img, "rb").read()
+	# byte_img = convert_pil_to_bytes(img)
 	resp = execute_api(byte_img)
 	target_bounding_boxes = {}
 	# Count each occurence of 'City, State, Zip'
@@ -237,8 +199,9 @@ def first_page(img):
 
 	if 'DOB (m' in field_mappings:
 		left_text = field_mappings['DOB (m']
-		key_field_index = left_text.lower().find('Sex'.lower())
-		first_field = left_text[:key_field_index]
+		close_bracket_split = field_mappings['DOB (m'].split(')')[1]
+		key_field_index = close_bracket_split.lower().find('Sex'.lower())
+		first_field = close_bracket_split[:key_field_index]
 		field_mappings['DOB (mm/dd/yyyy)'] = first_field
 		field_mappings['DOB (mm/dd/yyyy)'] = field_mappings['DOB (mm/dd/yyyy)'].lstrip().rstrip()
 		del field_mappings['DOB (m']
@@ -256,11 +219,18 @@ def first_page(img):
 		else:
 			field_mappings[firebase_keys[key]] = field_mappings[key]
 			del field_mappings[key]
+
+	if field_mappings['oth'] == '':
+		field_mappings['icd'] = 'z12'
+
+	else:
+		field_mappings['icd'] = 'other'
 	return field_mappings
 
 
 def second_page(img):
-	byte_img = convert_pil_to_bytes(img)
+	byte_img = open(img, "rb").read()
+	# byte_img = convert_pil_to_bytes(img)
 	resp = execute_api(byte_img)
 	target_bounding_boxes = {}
 
@@ -336,13 +306,5 @@ def second_page(img):
 				field_mappings[key] = char2num(field_mappings[key])
 				break
 
+
 	return field_mappings
-
-
-def convert_pdf(pdf_path):
-	images = convert_from_path(pdf_path, dpi=120)
-	for i in range(len(images)):
-		images[i] = images[i].resize((1240, 1754), Image.ANTIALIAS)
-	first_out = first_page(images[0])
-	second_out = second_page(images[1])
-	return first_out

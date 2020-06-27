@@ -1,9 +1,12 @@
 import pyrebase
 from flask import Flask, request
 from flask_restful import Resource, Api
-from parse_pdf import convert_pdf
+from parse_pdf import first_page
+from utils import convert_pdf, resize_image
+from flask_cors import CORS
 
 app = Flask(__name__)
+cors = CORS(app, resources={r"*": {"origins": "*"}})
 api = Api(app)
 
 class ocrAPI(Resource):
@@ -22,12 +25,17 @@ class ocrAPI(Resource):
 		firebase = pyrebase.initialize_app(config)
 
 		storage = firebase.storage()
+		upload_file = str(uuid_no)
+		storage.child(upload_file).download(upload_file)
 
-		pdf_file = str(uuid_no) + '.pdf'
-		storage.child("ScannedPDFs/"+pdf_file).download(pdf_file)
+		image_paths = []
+		if upload_file.endswith('.pdf'):
+			image_paths = convert_pdf(upload_file)
+		else:
+			image_paths.append(upload_file)
 
-
-		response = convert_pdf(pdf_file)
+		resize_image(image_paths)
+		response = first_page(image_paths[0])
 
 		return (response)
 
