@@ -1,7 +1,7 @@
 import pyrebase
 from flask import Flask, request
 from flask_restful import Resource, Api
-from parse_pdf import first_page
+from parse_pdf import requisiton_page,info_page
 from utils import convert_pdf, resize_image
 from flask_cors import CORS
 
@@ -10,7 +10,7 @@ cors = CORS(app, resources={r"*": {"origins": "*"}})
 api = Api(app)
 
 class ocrAPI(Resource):
-	def get(self, uuid_no):
+	def get(self, uuid_no,page_id):
 		config = {
 		    'apiKey': "AIzaSyB6QldxJGAfyNeo-Ql7aXXcEKl1rz1LwS4",
 		    'authDomain': "ocr-hack-v0.firebaseapp.com",
@@ -35,12 +35,15 @@ class ocrAPI(Resource):
 			image_paths.append(upload_file)
 
 		resize_image(image_paths)
-		response = first_page(image_paths[0])
+		if page_id == '0':
+			response = requisiton_page(image_paths)
+		if page_id == '1':
+			response = info_page(image_paths)
 
 		return (response)
 
 
-api.add_resource(ocrAPI,'/reqtform/<uuid_no>')
+api.add_resource(ocrAPI,'/reqtform/<uuid_no>/<page_id>')
 
 if __name__ == '__main__':
    app.run()
