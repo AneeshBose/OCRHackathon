@@ -206,6 +206,14 @@ def first_page(img):
 		close_bracket_split = field_mappings['DOB (m'].split(')')[1]
 		key_field_index = close_bracket_split.lower().find('Sex'.lower())
 		first_field = close_bracket_split[:key_field_index]
+		second_field = close_bracket_split[key_field_index:].lstrip()
+		is_male = validate_checkbox(second_field, 'male')
+		is_female = validate_checkbox(second_field, 'female')
+		if is_male:
+			field_mappings['Sex'] = "male"
+		elif is_female:
+			field_mappings['Sex'] = "female"
+
 		field_mappings['DOB (mm/dd/yyyy)'] = first_field
 		field_mappings['DOB (mm/dd/yyyy)'] = field_mappings['DOB (mm/dd/yyyy)'].lstrip().rstrip()
 		del field_mappings['DOB (m']
@@ -254,12 +262,13 @@ def first_page(img):
 		if not is_work:
 			is_work = validate_checkbox(line['text'], 'work')
 
+		'''
 		#sex male female
 		if not is_male:
 			is_male = validate_checkbox(line['text'], 'male')
 		if not is_female:
 			is_female = validate_checkbox(line['text'], 'female')
-
+		'''
 		#descent yes no
 		if not is_descent_yes:
 			is_descent_yes = validate_checkbox(line['text'], 'Yes')
@@ -313,12 +322,14 @@ def first_page(img):
 	else:
 		field_mappings['Contact type'] = 'home'
 
+	'''
 	if is_male:
 		field_mappings['Sex'] = "male"
 	elif is_female:
 		field_mappings['Sex'] = 'female'
 	else:
 		field_mappings['Sex'] = "male"
+	'''
 
 	if is_descent_yes:
 		field_mappings['Origin'] = "yes"
