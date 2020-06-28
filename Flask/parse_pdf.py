@@ -389,6 +389,13 @@ def first_page(img):
 			field_mappings[firebase_keys[key]] = field_mappings[key]
 			del field_mappings[key]
 
+
+
+		
+	ba_remove_spaces = field_mappings['ba'].replace(' ','')
+	if ba_remove_spaces == '':
+		field_mappings['ba'] = field_mappings['sa']
+
 	if field_mappings['oth'] == '':
 		field_mappings['icd'] = 'z12'
 
