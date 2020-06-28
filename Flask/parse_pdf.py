@@ -220,7 +220,7 @@ def first_page(img):
 		field_mappings['DOB (mm/dd/yyyy)'] = field_mappings['DOB (mm/dd/yyyy)'].lstrip().rstrip()
 		del field_mappings['DOB (m']
 
-	cases = ["DOB", "Number", "NPI", "Date"]
+	cases = ["DOB", "Number", "NPI", "Date","MRN"]
 	for key in field_mappings.keys():
 		for case in cases:
 			if case in key:
