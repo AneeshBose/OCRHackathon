@@ -108,6 +108,7 @@ def execute_api(byte_img):
 
 
 def validate_checkbox(line, value):
+    possible_chars = ['O', 'o', '0']
     pos = line.lower().find(value)
     #if value in line.lower():
     #    print(line.lower())
@@ -116,12 +117,12 @@ def validate_checkbox(line, value):
     elif pos == 0:
         return True
     elif pos == 1:
-        if line[0] == 'O':
+        if line[0] in possible_chars:
             return False
         else:
             return True
     else:
-        if line[pos - 1] == 'O' or line[pos - 2] == 'O':
+        if line[pos - 1] in possible_chars or line[pos - 2] in possible_chars:
             return False
         else:
             return True
