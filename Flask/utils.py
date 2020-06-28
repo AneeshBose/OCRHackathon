@@ -106,3 +106,23 @@ def execute_api(byte_img):
         if "status" in analysis and analysis['status'] == 'failed':
             poll = False
     return analysis
+
+
+def validate_checkbox(line, value):
+    pos = line.lower().find(value)
+    #if value in line.lower():
+    #    print(line.lower())
+    if pos == -1:
+        return False
+    elif pos == 0:
+        return True
+    elif pos == 1:
+        if line[0] == 'O':
+            return False
+        else:
+            return True
+    else:
+        if line[pos - 1] == 'O' or line[pos - 2] == 'O':
+            return False
+        else:
+            return True

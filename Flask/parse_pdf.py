@@ -4,8 +4,8 @@ import time
 from shapely.geometry import Polygon
 from utils import req_target_fields, req_other_texts, req_target_offsets, calculate_req_bounding_box
 from utils import info_target_fields, info_special_target_fields, info_other_texts, info_target_offsets, calculate_info_bounding_box
-from utils import execute_api, char2num, firebase_keys
-
+from utils import execute_api, char2num, firebase_keys, validate_checkbox
+from utils import resize_image
 
 
 def first_page(img):
@@ -112,7 +112,7 @@ def first_page(img):
 		bill_add += pair[0] + ' '
 	bill_add = bill_add.replace('Same as Shipping ', '')
 	bill_add = bill_add.replace(']','').replace('[','')
-	
+
 
 	field_mappings['Billing Address'] = [[bill_add, 0]]
 
@@ -161,7 +161,7 @@ def first_page(img):
 		second_field = left_text[key_field_index + len('Last Name'):]
 		field_mappings['First Name'], field_mappings['Last Name'] = first_field, second_field
 		field_mappings['First Name'] = field_mappings['First Name'].lstrip().rstrip()
-		field_mappings['Last Name'] = field_mappingsShipping['Last Name'].lstrip().rstrip()
+		field_mappings['Last Name'] = field_mappings['Last Name'].lstrip().rstrip()
 
 	if 'City, State, Zip2' in field_mappings:
 		left_text = field_mappings['City, State, Zip2']
@@ -216,6 +216,158 @@ def first_page(img):
 			if case in key:
 				field_mappings[key] = char2num(field_mappings[key])
 				break
+
+	is_home = False
+	is_mob = False
+	is_work = False
+
+	is_male = False
+	is_female = False
+
+	is_descent_yes = False
+	is_descent_no = False
+
+	is_white = False
+	is_black = False
+	is_asian = False
+	is_haw = False
+	is_ind = False
+
+	is_billpay_yes = False
+	is_billpay_no = False
+
+	is_rel_self = False
+	is_rel_spouse = False
+	is_rel_other = False
+
+	is_type_private = False
+	is_type_medicare = False
+	is_type_medicareadvt = False
+	is_type_medicaid = False
+	is_type_tricare = False
+
+	for index, line in enumerate(resp["analyzeResult"]["readResults"][0]["lines"]):
+		if not is_home:
+			is_home = validate_checkbox(line['text'], 'home')
+		if not is_mob:
+			is_mob = validate_checkbox(line['text'], 'mobile')
+		if not is_work:
+			is_work = validate_checkbox(line['text'], 'work')
+
+		#sex male female
+		if not is_male:
+			is_male = validate_checkbox(line['text'], 'male')
+		if not is_female:
+			is_female = validate_checkbox(line['text'], 'female')
+
+		#descent yes no
+		if not is_descent_yes:
+			is_descent_yes = validate_checkbox(line['text'], 'Yes')
+		if not is_descent_no:
+			is_descent_no = validate_checkbox(line['text'], 'No')
+
+		#race white black asian hawaiian indian
+		if not is_white:
+			is_white = validate_checkbox(line['text'], 'White')
+		if not is_black:
+			is_black = validate_checkbox(line['text'], 'Black or African-American')
+		if not is_asian:
+			is_asian = validate_checkbox(line['text'], 'Asian')
+		if not is_haw:
+			is_haw = validate_checkbox(line['text'], 'Native Hawaiian or other Pacific Islander')
+		if not is_ind:
+			is_ind = validate_checkbox(line['text'], 'American Indian or Alaska Native')
+
+		#billpay yes no
+		if not is_billpay_yes:
+			is_billpay_yes = validate_checkbox(line['text'], 'Yes (complete below)')
+		if not is_billpay_no:
+			is_billpay_no = validate_checkbox(line['text'], 'No (patient will self-pay)')
+
+		#rel self spouse other
+		if not is_rel_self:
+			is_rel_self = validate_checkbox(line['text'], 'Self')
+		if not is_rel_spouse:
+			is_rel_spouse = validate_checkbox(line['text'], 'Spouse')
+		if not is_rel_other:
+			is_rel_other = validate_checkbox(line['text'], 'Other')
+
+		#type private medicare medicareadvt medicaid tricare
+		if not is_type_private:
+			is_type_private = validate_checkbox(line['text'], 'Private')
+		if not is_type_medicare:
+			is_type_medicare = validate_checkbox(line['text'], 'Medicare')
+		if not is_type_medicareadvt:
+			is_type_medicareadvt = validate_checkbox(line['text'], 'Medicare Advantage')
+		if not is_type_medicaid:
+			is_type_medicaid = validate_checkbox(line['text'], 'Medicaid')
+		if not is_type_tricare:
+			is_type_tricare = validate_checkbox(line['text'], 'Tricare')
+
+	if is_home:
+		field_mappings['Contact type'] = 'home'
+	elif is_mob:
+		field_mappings['Contact type'] = 'mobile'
+	elif is_work:
+		field_mappings['Contact type'] = 'work'
+	else:
+		field_mappings['Contact type'] = 'home'
+
+	if is_male:
+		field_mappings['Sex'] = "male"
+	elif is_female:
+		field_mappings['Sex'] = 'female'
+	else:
+		field_mappings['Sex'] = "male"
+
+	if is_descent_yes:
+		field_mappings['Origin'] = "yes"
+	elif is_descent_no:
+		field_mappings['Origin'] = "no"
+	else:
+		field_mappings['Origin'] = "yes"
+
+	if is_white:
+		field_mappings['Race'] = 'white'
+	elif is_black:
+		field_mappings['Race'] = 'black'
+	elif is_asian:
+		field_mappings['Race'] = 'asian'
+	elif is_haw:
+		field_mappings['Race'] = 'hawaiian'
+	elif is_ind:
+		field_mappings['Race'] = 'indian'
+	else:
+		field_mappings['Race'] = 'white'
+
+	if is_billpay_yes:
+		field_mappings['Pay Insurance'] = 'yes'
+	elif is_billpay_no:
+		field_mappings['Pay Insurance'] = 'no'
+	else:
+		field_mappings['Pay Insurance'] = 'yes'
+
+	if is_rel_self:
+		field_mappings['Relationship to patient'] = 'self'
+	elif is_rel_spouse:
+		field_mappings['Relationship to patient'] = 'spouse'
+	elif is_rel_other:
+		field_mappings['Relationship to patient'] = 'other'
+	else:
+		field_mappings['Relationship to patient'] = 'self'
+
+	if is_type_private:
+		field_mappings['Type'] = 'private'
+	elif is_type_medicare:
+		field_mappings['Type'] = 'medicare'
+	elif is_type_medicareadvt:
+		field_mappings['Type'] = 'medicareadvt'
+	elif is_type_medicaid:
+		field_mappings['Type'] = 'medicaid'
+	elif is_type_tricare:
+		field_mappings['Type'] = 'tricare'
+	else:
+		field_mappings['Type'] = 'private'
 
 	for key in firebase_keys:
 		if key not in field_mappings:
