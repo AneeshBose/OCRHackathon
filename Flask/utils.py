@@ -48,19 +48,18 @@ def calculate_info_bounding_box(inputBox,offset):
     bounding_box.append(inputBox[7] + offset[7])
     return(bounding_box)
 
-
-
-def char2num(raw_str):
+def char2num(raw_str,key_value):
     processed_str = ''
-    char_num_dict = {' ':'','\\':1,'O':0 , 'D':0 , 'Q':0, 'I':1, 'J':1, 'L':1, 'Z':2, 'H':4, 'U':4, 'S':5, 'G':5, 'C':6, 'T':7, 'B':8, 'o':0, 'a':0, 'd':0, 'p':0, 'q':0, 'i':1, 'l':1, 'f':1, 'z':2, 'h':4, 'u':4, 'v':4, 's':5, 'c':6, 'b':6, 'g':9, 'j':9}
+    char_num_dict = {'O':0 , 'D':0 , 'Q':0, 'I':1, 'J':1, 'L':1, 'Z':2, 'H':4, 'U':4, 'S':5, 'G':5, 'C':6, 'T':7, 'B':8, 'o':0, 'a':0, 'd':0, 'p':0, 'q':0, 'i':1, 'l':1, 'f':1, 'z':2, 'h':4, 'u':4, 'v':4, 's':5, 'c':6, 'b':6, 'g':9, 'j':9}
     for char in raw_str:
-        if char in char_num_dict:
-            processed_str += str(char_num_dict[char])
+        if ((key_value == 'NPI #') or (key_value == 'Group Number')) and (char.isalnum() == False):
+            pass
         else:
-            processed_str += char
-
+            if char in char_num_dict:
+                processed_str += str(char_num_dict[char])
+            else:
+                processed_str += char
     return processed_str
-
 
 def resize_image(image_paths):
     for image_path in image_paths:

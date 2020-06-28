@@ -214,7 +214,7 @@ def first_page(img):
 	for key in field_mappings.keys():
 		for case in cases:
 			if case in key:
-				field_mappings[key] = char2num(field_mappings[key])
+				field_mappings[key] = char2num(field_mappings[key],key)
 				break
 
 	is_home = False
