@@ -206,13 +206,15 @@ def first_page(img):
 		close_bracket_split = field_mappings['DOB (m'].split(')')[1]
 		key_field_index = close_bracket_split.lower().find('Sex'.lower())
 		first_field = close_bracket_split[:key_field_index]
-		second_field = close_bracket_split[key_field_index:].lstrip()
+		second_field = close_bracket_split[key_field_index+len('Sex'):].lstrip()
 		is_male = validate_checkbox(second_field, 'male')
 		is_female = validate_checkbox(second_field, 'female')
 		if is_male:
 			field_mappings['Sex'] = "male"
 		elif is_female:
 			field_mappings['Sex'] = "female"
+		else:
+			field_mappings['Sex'] = "male"
 
 		field_mappings['DOB (mm/dd/yyyy)'] = first_field
 		field_mappings['DOB (mm/dd/yyyy)'] = field_mappings['DOB (mm/dd/yyyy)'].lstrip().rstrip()
