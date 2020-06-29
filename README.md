@@ -51,6 +51,6 @@ Open the below links in a browser after replacing <file_name> with the filename 
   - Requisition form - localhost:8000/reqtform/<file_name>/0
   - Information Needed Form: localhost:8000/reqtform/<file_name>/1
 
-Note: file_name should contain the filetype extension also. Eg: For 'Sample.pdf', open browser with localhost:8000/reqtform/Sample.pdf/1
+*Note:* file_name should contain the filetype extension also. Eg: For 'Sample.pdf', open browser with localhost:8000/reqtform/Sample.pdf/1
 
 Please note internet connection is mandatory for running app.py
