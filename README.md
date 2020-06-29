@@ -7,7 +7,7 @@ Visit: https://ocr-hack-v0.web.app/
 
 To login, use the default username and password as admin
 
-### Requisition Form: 
+### Processing: Requisition Form: 
   -  To upload and process or view a patient’s requisition form, choose the “Form 1” option after logging in. 
   -  In order to process a file, upload the file using 'Choose files' option and then hit'Upload file' (Supported file formats are .pdf, .jpg, .jpeg, .png, .tiff). 
   -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page (please wait about 5 seconds for this to happen). 
@@ -15,8 +15,8 @@ To login, use the default username and password as admin
   -  If you wish to export the response from our custom OCR API as a JSON, hit on 'Export JSON'. After successfully submitting the form, you will be redirected to the requisition form’s upload / search page.
   -  To search for a patient, use the patient ID or MRN as the primary key. While you are on the preview page, one can retrieve all the data on the form from the database.
 
-### Information Needed Form: 
-  -  The 'Form 2' button has the provision to process and preview the 'Information Needed' page. The supported formats remain the same. 
+### Processing: Information Needed Form: 
+  -  The "Form 2" button has the provision to process and preview the 'Information Needed' page. The supported formats remain the same. 
   -  On choosing the file and uploading it, you’ll be redirected to the page where you can make changes and then submit. 
   -  One can preview the submitted form using the 'Order number'. If no order number is mentioned then the default value will be randomly generated and stored. 
 
