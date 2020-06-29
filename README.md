@@ -2,8 +2,9 @@
 
 This codebase contains submission of Exact Sciences OCR Hackathon
 
-### HomePage: [PixelWave OCR - https://ocr-hack-v0.web.app](https://ocr-hack-v0.web.app)
- 
+### HomePage: [PixelWave OCR](https://ocr-hack-v0.web.app)
+Visit: https://ocr-hack-v0.web.app
+
 To login, use the below default credentials:  
 Username: admin  
 Password: admin
