@@ -25,7 +25,7 @@ To login, use the default username and password as admin
  - Frontend - HTML, CSS, Bootstrap, Javascript, JQuery
  - Framework - Flask
  - Database - Firebase
- - OCR - + PixelWave Custom Model + Microsoft Computer Vision Read API
+ - OCR - PixelWave Custom Model + Microsoft Computer Vision Read API
  - API Hosting - Azure App Services
 
 ### Executing it locally:
