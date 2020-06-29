@@ -2,9 +2,9 @@
 
 This codebase contains submission of Exact Sciences OCR Hackathon
 
-### Login Page:
+### HomePage:
 Visit: https://ocr-hack-v0.web.app/
-https://stackoverflow.com/posts/33191832/edit  
+ 
 To login, use the below default credentials:  
 Username: admin  
 Password: admin
