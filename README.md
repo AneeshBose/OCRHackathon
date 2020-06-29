@@ -5,7 +5,9 @@ This codebase contains submission of Exact Sciences OCR Hackathon
 ### Login Page:
 Visit: https://ocr-hack-v0.web.app/
 
-To login, use the default username and password as admin
+To login, use the below default credentials:
+Username: admin
+Password: admin
 
 ### Processing: Requisition Form: 
   -  To upload and process or view a patient’s requisition form, choose the “Form 1” option after logging in. 
