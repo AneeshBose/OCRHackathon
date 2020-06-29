@@ -32,8 +32,8 @@ Password: admin
 
 ### Executing it locally:
 #### Pre-requisite:
-Python 3.x and pip needs to be installed.
-Install Poppler (Ref: https://pypi.org/project/pdf2image/) 
+1. Python 3.x and pip needs to be installed.  
+2. Install Poppler (Ref: https://pypi.org/project/pdf2image/) 
 
 #### Setup:
 ```sh
