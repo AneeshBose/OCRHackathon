@@ -4,13 +4,13 @@ This codebase contains submission of Exact Sciences OCR Hackathon
 
 ### Login Page:
 Visit: https://ocr-hack-v0.web.app/
-
-To login, use the below default credentials:
-Username: admin
+https://stackoverflow.com/posts/33191832/edit
+To login, use the below default credentials:&nbsp;
+Username: admin nbsp;
 Password: admin
 
 ### Processing: Requisition Form: 
-  -  To upload and process or view a patient’s requisition form, choose the “Form 1” option after logging in. 
+  -  To upload and process or view a patient’s requisition form, choose the **Form 1** option after logging in. 
   -  In order to process a file, upload the file using 'Choose files' option and then hit'Upload file' (Supported file formats are .pdf, .jpg, .jpeg, .png, .tiff). 
   -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page (please wait about 5 seconds for this to happen). 
   -  If there are any corrections to be made, one can edit during this phase. After successfully making the required changes (incase of any discrepancy) hit on the submit button and then confirm the same. 
@@ -18,7 +18,7 @@ Password: admin
   -  To search for a patient, use the patient ID or MRN as the primary key. While you are on the preview page, one can retrieve all the data on the form from the database.
 
 ### Processing: Information Needed Form: 
-  -  The "Form 2" button has the provision to process and preview the 'Information Needed' page. The supported formats remain the same. 
+  -  The **Form 2** button has the provision to process and preview the 'Information Needed' page. The supported formats remain the same. 
   -  On choosing the file and uploading it, you’ll be redirected to the page where you can make changes and then submit. 
   -  One can preview the submitted form using the 'Order number'. If no order number is mentioned then the default value will be randomly generated and stored. 
 
