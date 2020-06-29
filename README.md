@@ -1,8 +1,8 @@
-# PixelWaveOCR
+# PixelWaveOCR - Creating Digital Revolution
 
 This codebase contains submission of Exact Sciences OCR Hackathon
 
-### Login Page:
+## Login Page:
 Visit: https://ocr-hack-v0.web.app/
 
 To login, use the default username and password as admin
