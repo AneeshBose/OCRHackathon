@@ -14,7 +14,7 @@ Password: admin
   -  In order to process a file, upload the file using **Choose files** option and then hit **Upload file** (Supported file formats are **.pdf, .jpg, .jpeg, .png, .tiff**). 
   -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page (please wait about 5 seconds for this to happen). 
   -  If there are any corrections to be made, one can edit during this phase. After successfully making the required changes (incase of any discrepancy) hit on the **Submit** button and then confirm the same. 
-  -  If you wish to export the response from our custom OCR API as a JSON, hit on **Export JSON**. After successfully submitting the form, you will be redirected to the requisition form’s upload / search page.
+  -  If you wish to export the response from our custom OCR API as a JSON, hit on **Export JSON** button. After successfully submitting the form, you will be redirected to the requisition form’s upload / search page.
   -  To search for a patient, use the **Patient ID or MRN** as the search value. While you are on the preview page, one can retrieve all the data on the form from the database.
 
 ### Processing: Information Needed Form: 
@@ -23,12 +23,12 @@ Password: admin
   -  One can preview the submitted form using the 'Order number'. If no order number is mentioned then the default value will be randomly generated and stored. 
 
 ### Technology Stack:
- - Backend - Python
- - Frontend - HTML, CSS, Bootstrap, Javascript, JQuery
- - Framework - Flask
- - Database - Firebase
- - OCR - PixelWave Custom Model + Microsoft Computer Vision Read API
- - API Hosting - Azure App Services
+ - **Backend** - Python
+ - **Frontend** - HTML, CSS, Bootstrap, Javascript, JQuery
+ - **Framework** - Flask
+ - **Database** - Firebase
+ - **OCR** - PixelWave Custom Model + Microsoft Computer Vision Read API
+ - **API Hosting** - Azure App Services
 
 ### Executing it locally:
 #### Pre-requisite:
