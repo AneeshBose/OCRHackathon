@@ -10,7 +10,7 @@ Username: admin
 Password: admin
 
 ### Processing: Requisition Form: 
-  -  To upload and process or view a patient’s requisition form, choose the **Form 1** option after logging in. 
+  -  To upload and run OCR on a patient’s requisition form, choose the **Form 1** option after logging in. 
   -  In order to process a file, upload the file using **Choose files** option and then hit **Upload file** (Supported file formats are **.pdf, .jpg, .jpeg, .png, .tiff**). 
   -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page (please wait about 5 seconds for this to happen). 
   -  If there are any corrections to be made, one can edit during this phase. After successfully making the required changes (incase of any discrepancy) hit on the **Submit** button and then confirm the same. 
@@ -18,7 +18,7 @@ Password: admin
   -  To search for a patient, use the **Patient ID or MRN** as the search value. While you are on the preview page, one can retrieve all the data on the form from the database.
 
 ### Processing: Information Needed Form: 
-  -  The **Form 2** button has the provision to process and preview the 'Information Needed' page. The supported formats remain the same. 
+  -  The **Form 2** button has the provision to process and preview the 'Information Needed' page. The supported file formats remain the same. 
   -  On choosing the file and uploading it, you’ll be redirected to the page where you can make changes and then submit. 
   -  One can preview the submitted form using the 'Order number'. If no order number is mentioned then the default value will be randomly generated and stored. 
 
@@ -50,7 +50,4 @@ $ python app.py
 Open the below links in a browser after replacing <file_name> with the filename of the file to be tested.
   - Requisition form - localhost:8000/reqtform/<file_name>/0
   - Information Needed Form: localhost:8000/reqtform/<file_name>/1
-
-**Note:** file_name should contain the filetype extension also. Eg: For 'Sample.pdf', open browser with localhost:8000/reqtform/Sample.pdf/1
-
-Please note internet connection is mandatory for running app.py
+Eg: To run OCR recognition in Information Needed form for filename as Sample.pdf, open browser with localhost:8000/reqtform/Sample.pdf/1
