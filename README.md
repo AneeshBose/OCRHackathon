@@ -31,22 +31,22 @@ Password: admin
  - API Hosting - Azure App Services
 
 ### Executing it locally:
-##### Pre-requisite:
+#### Pre-requisite:
 Python 3.x and pip needs to be installed.
 Install Poppler (Ref: https://pypi.org/project/pdf2image/) 
 
-##### Setup:
+#### Setup:
 ```sh
 $ pip install -r requirment.txt
 ```
-##### Data:
+#### Data:
 Maintain all the files to be tested in the same directory as app.py
 
-##### Execution:
+#### Execution:
 ```sh
 $ python app.py
 ```
-##### To get json output use the following API endpoints:
+#### To get json output use the following API endpoints:
 Open the below links in a browser after replacing <file_name> with the filename of the file to be tested.
   - Requisition form - localhost:8000/reqtform/<file_name>/0
   - Information Needed Form: localhost:8000/reqtform/<file_name>/1
