@@ -2,12 +2,12 @@
 
 This codebase contains submission of Exact Sciences OCR Hackathon
 
-#### Login Page:
+### Login Page:
 Visit: https://ocr-hack-v0.web.app/
 
 To login, use the default username and password as admin
 
-#### Requisition Form: 
+### Requisition Form: 
   -  To upload and process or view a patient’s requisition form, choose the “Form 1” option after logging in. 
   -  In order to process a file, upload the file using 'Choose files' option and then hit'Upload file' (Supported file formats are .pdf, .jpg, .jpeg, .png, .tiff). 
   -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page (please wait about 5 seconds for this to happen). 
@@ -15,12 +15,12 @@ To login, use the default username and password as admin
   -  If you wish to export the response from our custom OCR API as a JSON, hit on 'Export JSON'. After successfully submitting the form, you will be redirected to the requisition form’s upload / search page.
   -  To search for a patient, use the patient ID or MRN as the primary key. While you are on the preview page, one can retrieve all the data on the form from the database.
 
-#### Information Needed Form: 
+### Information Needed Form: 
   -  The 'Form 2' button has the provision to process and preview the 'Information Needed' page. The supported formats remain the same. 
   -  On choosing the file and uploading it, you’ll be redirected to the page where you can make changes and then submit. 
   -  One can preview the submitted form using the 'Order number'. If no order number is mentioned then the default value will be randomly generated and stored. 
 
-#### Technology Stack:
+### Technology Stack:
  - Backend - Python
  - Frontend - HTML, CSS, Bootstrap, Javascript, JQuery
  - Framework - Flask
@@ -28,7 +28,7 @@ To login, use the default username and password as admin
  - OCR - + PixelWave Custom Model + Microsoft Computer Vision Read API
  - API Hosting - Azure App Services
 
-#### Executing it locally:
+### Executing it locally:
 ##### Pre-requisite:
 Python 3.x and pip needs to be installed.
 Install Poppler (Ref: https://pypi.org/project/pdf2image/) 
