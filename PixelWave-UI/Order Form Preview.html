@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>PixelWave</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="exact sciences.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+    
+     <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <!-- import the real time database SDK -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-database.js"></script>
+    
+      
+      <script>
+const firebaseConfig = {
+ apiKey: "AIzaSyB6QldxJGAfyNeo-Ql7aXXcEKl1rz1LwS4",
+  authDomain: "ocr-hack-v0.firebaseapp.com",
+  databaseURL: "https://ocr-hack-v0.firebaseio.com",
+  projectId: "ocr-hack-v0",
+  storageBucket: "ocr-hack-v0.appspot.com",
+  messagingSenderId: "860184810119",
+  appId: "1:860184810119:web:8e188783b7a4644d02de22",
+  measurementId: "G-8M2FNH93GQ"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+      </script>
+    
+    
+    
+<body>
+	<img src="exact sciences.png" height="80" width="150">
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+		
+                
+                <span class="login100-form-title p-b-51">
+						Cologuard Order
+					</span>
+                
+<!--
+               
+			provider info		
+          
+-->
+                     <center><h5> <b>Information Needed </b></h5> </center><br>
+                    
+  <label for="hname">Cologuard Oder Number:</label>
+<!--  <input class="input100"  type="text" id="hname">-->
+ 
+                <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="con">
+						<span class="focus-input100"></span>
+					</div>       
+                    
+                
+  <label for="pname">Date Received by ES Labs:</label>
+   <div class="wrap-input100 validate-input m-b-16" >
+						<input class="input100" type="text" id="drbel">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+                    <label for="npi">Health Organization Name:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hon">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+                       <label for="location">Provider Name:</label>
+   <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pn">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+                    <label for="csz">Provider NPI:</label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pnpi">
+						<span class="focus-input100"></span>
+					</div>  
+                    
+                    <label for="ph">ICD-10 Codes Z12.11 and Z12.12: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="icd">
+						<span class="focus-input100"></span>
+					</div>  
+                    
+                
+                    <label for="sfn">Patient Name:</label>
+   <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="ppn">
+						<span class="focus-input100"></span>
+					</div>  
+   
+                
+                
+
+ 
+              <label for="csz">Patient Date of Birth: </label> 
+<div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="ppdob">
+						<span class="focus-input100"></span>
+					</div> 
+    
+
+            
+                <label for="csz">Patient Sex:</label> 
+          <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pps">
+						<span class="focus-input100"></span>
+					</div> 
+            
+            <label for="csz">Patient Phone Number: </label> 
+                <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pppn">
+						<span class="focus-input100"></span>
+					</div> 
+                
+<!--
+                
+      Patient Demographics     
+                
+                
+-->
+                
+                
+      
+  <label for="hname">Patient Shipping Address:</label>
+   <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="ppsa">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                <label for="ph">Please Confirm Secure Fax #: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pcsf">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                
+                <label for="ph">Healthcare Provider Signature: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hps">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                    
+  <label for="pname">Insurance Type:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="it">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                    
+                    <label for="npi"> Insurance Carrier Name: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="icn">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                    
+                       <label for="location">Subscriber ID:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="sid">
+						<span class="focus-input100"></span>
+					</div>  
+                
+     
+                    
+                    <label for="ph">Group Number: </label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="gpn">
+						<span class="focus-input100"></span>
+					</div>  
+                    
+                
+                
+             <label for="csz">Policy Owner/Holder Name:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hn">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                
+                
+                <label for="ph">Policy Owner/Holder Date of Birth: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hndob">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+         <p> Sincerely, <br> Exact Sciences Laboratories.</p>
+                
+<!--
+                <div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn" id="send">
+							Cancel
+						</button>
+					</div>
+
+                
+					<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn" id="send">
+							Submit
+						</button>
+					</div>
+                
+-->
+                	
+				
+			</div>
+		</div>
+
+	</div>
+
+
+    
+    
+    
+    
+    <script>
+                
+             
+  
+        
+var orderno = sessionStorage.getItem("on");
+//console.log(userno1);
+    
+  var database = firebase.database();
+                    
+  var data = database.ref(orderno);
+   data.on('value', function(snapshot) {
+      
+    //  console.log(snapshot.val().npi);
+    
+
+       var con =snapshot.val().con;
+      document.getElementById("con").value=con;
+       
+         var drbel =snapshot.val().drbel;
+      document.getElementById("drbel").value=drbel;
+       
+          var gpn =snapshot.val().gpn;
+      document.getElementById("gpn").value=gpn;
+       
+       var hn =snapshot.val().hn;
+      document.getElementById("hn").value=hn;
+       
+       var hndob =snapshot.val().hndob;
+      document.getElementById("hndob").value=hndob;
+       
+       var hon =snapshot.val().hon;
+      document.getElementById("hon").value=hon;
+       
+       var hps =snapshot.val().hps;
+      document.getElementById("hps").value=hps;
+       
+       var icn =snapshot.val().icn;
+      document.getElementById("icn").value=icn;
+       
+         var icd =snapshot.val().icd;
+      document.getElementById("icd").value=icd;
+       
+       var it =snapshot.val().it;
+      document.getElementById("it").value=it;
+       
+       var pcsf =snapshot.val().pcsf;
+      document.getElementById("pcsf").value=pcsf;
+       
+       var pn =snapshot.val().pn;
+      document.getElementById("pn").value=pn;
+       
+       var pnpi =snapshot.val().pnpi;
+      document.getElementById("pnpi").value=pnpi;
+       
+       var ppdob =snapshot.val().ppdob;
+      document.getElementById("ppdob").value=ppdob;
+       
+       var ppn =snapshot.val().ppn;
+      document.getElementById("ppn").value=ppn;
+       
+       var pppn =snapshot.val().pppn;
+      document.getElementById("pppn").value=pppn;
+       
+       var pps =snapshot.val().pps;
+      document.getElementById("pps").value=pps;
+       
+       var ppsa =snapshot.val().ppsa;
+      document.getElementById("ppsa").value=ppsa;
+       
+       var sid =snapshot.val().sid;
+      document.getElementById("sid").value=sid;
+       
+       
+       
+       
+               
+        });
+                </script>
+    
+<!--
+   <script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script> 
+     
+-->
+</body>
+</html>

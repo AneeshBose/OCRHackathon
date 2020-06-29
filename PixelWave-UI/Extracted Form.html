@@ -1,0 +1,1067 @@
+<html>
+<head>
+   
+    <img src="exact sciences.png" height="80" width="150">
+    
+    
+      <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <!-- import the real time database SDK -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-database.js"></script>
+    
+      
+      <script>
+const firebaseConfig = {
+ apiKey: "AIzaSyB6QldxJGAfyNeo-Ql7aXXcEKl1rz1LwS4",
+  authDomain: "ocr-hack-v0.firebaseapp.com",
+  databaseURL: "https://ocr-hack-v0.firebaseio.com",
+  projectId: "ocr-hack-v0",
+  storageBucket: "ocr-hack-v0.appspot.com",
+  messagingSenderId: "860184810119",
+  appId: "1:860184810119:web:8e188783b7a4644d02de22",
+  measurementId: "G-8M2FNH93GQ"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+      </script>
+    
+    
+    
+    
+    <style>
+.container {
+  position: relative;
+  width: 100%;
+  max-width: 400px;
+}
+
+.container img {
+  width: 100%;
+  height: auto;
+}
+
+.container .btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  background-color: #827ffe;
+  color: white;
+  font-size: 16px;
+  padding: 16px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.container .btn:hover {
+  background-color: black;
+  color: white;
+}
+  
+</style>        
+        
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #827ffe;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+    
+    
+<!--    <img src="exact sciences.png" height="80" width="150">-->
+    
+    <meta http-equiv=Content-Type content="text/html; charset=UTF-8">
+<style type="text/css">
+<!--
+span.cls_004{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_004{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_002{font-family:Arial,serif;font-size:15.1px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_002{font-family:Arial,serif;font-size:15.1px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_003{font-family:Arial,serif;font-size:8.8px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_003{font-family:Arial,serif;font-size:8.8px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_005{font-family:Arial,serif;font-size:8.1px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_005{font-family:Arial,serif;font-size:8.1px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_006{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_006{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_007{font-family:Arial,serif;font-size:12.1px;color:rgb(254,255,255);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_007{font-family:Arial,serif;font-size:12.1px;color:rgb(254,255,255);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_008{font-family:Arial,serif;font-size:8.1px;color:rgb(254,255,255);font-weight:normal;font-style:italic;text-decoration: none}
+div.cls_008{font-family:Arial,serif;font-size:8.1px;color:rgb(254,255,255);font-weight:normal;font-style:italic;text-decoration: none}
+span.cls_010{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_010{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_009{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_009{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_011{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+div.cls_011{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+span.cls_012{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_012{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_013{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:bold;font-style:italic;text-decoration: none}
+div.cls_013{font-family:Arial,serif;font-size:9.1px;color:rgb(43,42,41);font-weight:bold;font-style:italic;text-decoration: none}
+span.cls_014{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+div.cls_014{font-family:Arial,serif;font-size:7.0px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+span.cls_015{font-family:Arial,serif;font-size:8.1px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+div.cls_015{font-family:Arial,serif;font-size:8.1px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+span.cls_016{font-family:Arial,serif;font-size:8.8px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_016{font-family:Arial,serif;font-size:8.8px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_017{font-family:Arial,serif;font-size:11.7px;color:rgb(254,255,255);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_017{font-family:Arial,serif;font-size:11.7px;color:rgb(254,255,255);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_018{font-family:Arial,serif;font-size:6.4px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+div.cls_018{font-family:Arial,serif;font-size:6.4px;color:rgb(43,42,41);font-weight:normal;font-style:italic;text-decoration: none}
+span.cls_022{font-family:Arial,serif;font-size:7.0px;color:rgb(45,41,38);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_022{font-family:Arial,serif;font-size:7.0px;color:rgb(45,41,38);font-weight:normal;font-style:normal;text-decoration: none}
+span.cls_019{font-family:Arial,serif;font-size:12.1px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+div.cls_019{font-family:Arial,serif;font-size:12.1px;color:rgb(43,42,41);font-weight:bold;font-style:normal;text-decoration: none}
+span.cls_021{font-family:Arial,serif;font-size:6.9px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+div.cls_021{font-family:Arial,serif;font-size:6.9px;color:rgb(43,42,41);font-weight:normal;font-style:normal;text-decoration: none}
+-->
+</style>
+<script type="text/javascript" src="94d03dd6-b5e9-11ea-8b25-0cc47a792c0a_id_94d03dd6-b5e9-11ea-8b25-0cc47a792c0a_files/wz_jsgraphics.js"></script>
+</head>
+<body onload="myFunction()" style="margin:0;">
+    
+<div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+    
+<div style="position:absolute;left:50%;margin-left:-306px;top:0px;width:612px;height:792px;border-style:outset;overflow:hidden">
+<div style="position:absolute;left:0px;top:0px">
+<img src="94d03dd6-b5e9-11ea-8b25-0cc47a792c0a_id_94d03dd6-b5e9-11ea-8b25-0cc47a792c0a_files/background1.jpg" width=612 height=792></div>
+<div style="position:absolute;left:415.74px;top:13.21px" class="cls_004"><span class="cls_004">EXACT SCIENCES LABORATORIES, LLC</span></div>
+<div style="position:absolute;left:197.64px;top:13.02px" class="cls_002"><span class="cls_002">COLOGUARD</span><span class="cls_003"><sup>®</sup></span><span class="cls_002"> ORDER</span></div>
+<div style="position:absolute;left:421.53px;top:25.21px" class="cls_005"><span class="cls_005">145 E Badger Rd, Ste 100, Madison, WI 53713</span></div>
+<div style="position:absolute;left:205.47px;top:29.02px" class="cls_002"><span class="cls_002">REQUISITION FORM</span></div>
+<div style="position:absolute;left:458.78px;top:35.21px" class="cls_005"><span class="cls_005">p: 844-870-8870  |  ExactLabs.com</span></div>
+<div style="position:absolute;left:162.39px;top:48.02px" class="cls_006"><span class="cls_006">Stool-based DNA test with hemoglobin immunoassay component</span></div>
+<div style="position:absolute;left:469.38px;top:47.21px" class="cls_005"><span class="cls_005">NPI: 1629407069 TIN: 463095174</span></div>
+<div style="position:absolute;left:18.00px;top:61.95px" class="cls_007"><span class="cls_007">Provider & Order Information</span><span class="cls_008"><sup>Recommended: type all Provider information.</sup></span></div>
+<div style="position:absolute;left:220.32px;top:71.55px" class="cls_008"><span class="cls_008">Editable, printable PDF available at exactlabs.com</span></div>
+<div style="position:absolute;left:18.00px;top:85.98px" class="cls_004"><span class="cls_004">PROVIDER INFORMATION</span></div>
+<div style="position:absolute;left:310.88px;top:85.98px" class="cls_004"><span class="cls_004">ORDER INFORMATION</span></div>
+<div style="position:absolute;left:315.00px;top:108.00px" class="cls_010"><span class="cls_010">This section is not intended to influence the medical judgment of an ordering</span></div>
+<div style="position:absolute;left:18.00px;top:105.90px" class="cls_009"><span class="cls_009">Healthcare Organization Name: <input style="font-family: Segoe UI;" type="text" id="hon"  size="19"><br></span></div>
+<div style="position:absolute;left:315.00px;top:115.49px" class="cls_010"><span class="cls_010">provider in determining whether this test is right for any particular patient. The</span></div>
+<div style="position:absolute;left:315.00px;top:122.99px" class="cls_010"><span class="cls_010">following codes are listed as a convenience. Ordering practitioners should report</span></div>
+<div style="position:absolute;left:315.00px;top:130.49px" class="cls_010"><span class="cls_010">the diagnosis code(s) that best describes the reason for performing the test.</span></div>
+<div style="position:absolute;left:18.00px;top:135.40px" class="cls_009"><span class="cls_009">Provider Name:<input style="font-family: Segoe UI Semibold; font-size: 14" type="text" id="pn" size="22"></span></div>
+<div style="position:absolute;left:315.00px;top:144.67px" class="cls_004"><span class="cls_004">ICD-10 Code:</span></div>
+<div style="position:absolute;left:310.69px;top:152.27px" class="cls_009"><span class="cls_009"><form><input type="radio" id="z12" name="icd" value="z12">Z12.11 and Z12.12 (Encounter for screening for malignant</span></div>
+<div style="position:absolute;left:18.00px;top:162.90px" class="cls_009"><span class="cls_009">NPI #: <input style = "font-family: Segoe UI Semibold; font-size: 15" type="text" id="npi" size="24"></span></div>
+<div style="position:absolute;left:324.69px;top:170.27px" class="cls_009"><span class="cls_009">neoplasm of colon [Z12.11] and rectum [Z12.12])</span></div>
+    <div style="position:absolute;left:310.69px;top:178.77px" class="cls_009"><span class="cls_009"><input type="radio" id="other" name="icd" value="other">Other(s)<input style="font-family: Segoe UI;" type="text" id="oth" size="28"></span></div> </form>
+<div style="position:absolute;left:18.19px;top:190.80px" class="cls_009"><span class="cls_009">Location Address: <input style="font-family: Segoe UI Semibold; font-size: 13" type="text" id="la" size="25"></span></div>
+<div style="position:absolute;left:315.00px;top:202.77px" class="cls_004"><span class="cls_004">Certification</span></div>
+<div style="position:absolute;left:315.00px;top:212.77px" class="cls_005"><span class="cls_005">I am a licensed healthcare provider authorized to order Cologuard. This</span></div>
+<div style="position:absolute;left:18.19px;top:218.30px" class="cls_009"><span class="cls_009">City, State, Zip: <input style="font-family: Segoe UI;" type="text" id="csz1" name="pin" size="30"></span></div>
+<div style="position:absolute;left:315.00px;top:221.77px" class="cls_005"><span class="cls_005">test is medically necessary and the patient is eligible to use Cologuard.</span></div>
+<div style="position:absolute;left:315.00px;top:230.77px" class="cls_005"><span class="cls_005">I will maintain the privacy of test results and related information as</span></div>
+<div style="position:absolute;left:315.00px;top:239.77px" class="cls_005"><span class="cls_005">required by HIPAA. I authorize Exact Sciences Laboratories to obtain</span></div>
+<div style="position:absolute;left:18.19px;top:243.80px" class="cls_009"><span class="cls_009">Phone Number: <input style="font-family: Segoe UI;" type="text" id="ph" size="27"></span></div>
+<div style="position:absolute;left:315.00px;top:248.77px" class="cls_005"><span class="cls_005">reimbursement for Cologuard and to directly contact and collect</span></div>
+<div style="position:absolute;left:315.00px;top:257.77px" class="cls_005"><span class="cls_005">additional samples from the patient as appropriate.</span></div>
+<div style="position:absolute;left:18.19px;top:270.30px" class="cls_009"><span class="cls_009">Secure Fax Number*:<input style="font-family: Segoe UI; font-size: 13" type="text" id="sfn" size="26"></span></div>
+<div style="position:absolute;left:315.00px;top:273.77px" class="cls_011"><span class="cls_011">_____________________________________________________________</span></div>
+<div style="position:absolute;left:18.19px;top:284.20px" class="cls_012"><span class="cls_012"><br>*To receive results for this order, please provide </span><span class="cls_006">secure</span><span class="cls_012"> FAX number only</span></div>
+<div style="position:absolute;left:315.00px;top:265.37px" class="cls_013"><span class="cls_013"><input style="font-family: Segoe UI; font-size: 12" type="text" id="pin" name="pin" size="14">                  <br>Ordering Provider Signature </span></div> 
+<div style="position:absolute;left:497.55px;top:265.37px" class="cls_013"><span class="cls_013"><input style="font-family:Segoe UI;" type="text" id="doo"  size="11">Date of Order</span></div>
+<div style="position:absolute;left:18.00px;top:303.30px" class="cls_007"><span class="cls_007">Patient Demographics</span></div>
+<div style="position:absolute;left:165.94px;top:306.35px" class="cls_008"><span class="cls_008">Attach a copy of the front & back of primary and/or secondary insurance cards.</span></div>
+<div style="position:absolute;left:18.00px;top:323.45px" class="cls_009"><span class="cls_009">Patient ID/MRN:  <input style="font-family: Segoe UI Semibold; font-size: 13" type="text" id="mrn" size="25"></span></div>
+<div style="position:absolute;left:315.00px;top:323.45px" class="cls_009"><span class="cls_009">Phone Number</span><span class="cls_011"> (required)</span><span class="cls_009">: <input style="font-family: Segoe UI Semibold" type="text" id="phr"  size="20"></span></div> 
+<div style="position:absolute;left:420.24px;top:343.45px" class="cls_009">
+    <form> 
+    <span class="cls_009"> <form><input type="radio" id="home" name="phrr" value="home">Home</span> </div>
+<div style="position:absolute;left:470.40px;top:343.45px" class="cls_009"><span class="cls_009"><input type="radio" id="mobile" name="phrr" value="mobile">Mobile</span></div>
+<div style="position:absolute;left:520.21px;top:343.45px" class="cls_009"><span class="cls_009"><input type="radio" id="work" name="phrr" value="work">Work</span></div>
+    </form>
+<div style="position:absolute;left:18.00px;top:348.45px" class="cls_009"><span class="cls_009">First Name: <input style="font-family: Segoe UI Semibold; font-size: 13" type="text" id="fn"  size="8">  Last Name: <input style="font-family: Segoe UI Semibold; font-size: 13" type="text" id="ln"  size="9"></span></div>
+<div style="position:absolute;left:310.00px;top:370.45px" class="cls_009"><span class="cls_009">Language Preference </span><span class="cls_011">(optional)</span><span class="cls_009">:<input type="text" id="lp"  size="17"></span></div>
+<div style="position:absolute;left:18.00px;top:372.45px" class="cls_009"><span class="cls_009">DOB (mm/dd/yyyy): <input style="font-family: Segoe UI Semibold; font-size: 13" type="text" id="dob" size="8"> Sex:</span></div>
+<div style="position:absolute;left:205.88px;top:372.45px" class="cls_009"><span class="cls_009"><form> <input type="radio" id="m" name="sex" value="male">Male</span></div>
+<div style="position:absolute;left:250.48px;top:372.45px" class="cls_009"><span class="cls_009"><input type="radio" id="f" name="sex" value="female">Female</span></form></div>
+<div style="position:absolute;left:18.00px;top:396.47px" class="cls_009"><span class="cls_009">Shipping Address: <input style="font-family: Segoe UI Semibold; font-size: 13" type="text" id="sa" size="26"></span></div>
+<div style="position:absolute;left:315.00px;top:396.47px" class="cls_009"><span class="cls_009">Billing Address: <input style="font-family: Segoe UI Semibold; font-size: 13" type="text" id="ba"  size="26"></span></div>
+<div style="position:absolute;left:320.10px;top:415.68px" class="cls_014"><span class="cls_014">Same as Shipping</span></div>
+<div style="position:absolute;left:100.86px;top:411.47px" class="cls_009"><span class="cls_009"></span></div>
+<div style="position:absolute;left:390.33px;top:411.46px" class="cls_009"><span class="cls_009"></span></div>
+<div style="position:absolute;left:18.00px;top:431.47px" class="cls_009"><span class="cls_009">City, State, Zip: </span></div>
+<div style="position:absolute;left:95.97px;top:421.47px" class="cls_009"><span class="cls_009"><input style="font-family: Segoe UI" type="text" id="csz2" size="27"></span></div>
+<div style="position:absolute;left:315.00px;top:421.46px" class="cls_009"><span class="cls_009">City, State, Zip:  <input style="font-family: Segoe UI" type="text" id="csz3" name="pin" size="27"></span></div>
+<div style="position:absolute;left:18.00px;top:448.05px" class="cls_004"><span class="cls_004">PATIENT ETHNICITY AND RACE   </span><span class="cls_015">The completion of this section is optional.</span></div>
+<div style="position:absolute;left:18.00px;top:467.30px" class="cls_009"><span class="cls_009">Is your patient of Hispanic or Latino origin or descent?</span></div>
+<div style="position:absolute;left:250.77px;top:462.30px" class="cls_009"><span class="cls_009"><form><input type="radio" id="y" name="yn" value="yes">Yes</span></div>
+    <div style="position:absolute;left:300.97px;top:462.30px" class="cls_009"><span class="cls_009"><input type="radio" id="n" name="yn" value="no">No</span></div> </form>
+<div style="position:absolute;left:18.00px;top:484.81px" class="cls_009"><span class="cls_009">Please mark one or more to indicate your patient’s race:</span></div>
+<div style="position:absolute;left:25.57px;top:493.20px" class="cls_016"><span class="cls_016"><form><input type="radio" id="white" name="race" value="white">White</span></div>
+<div style="position:absolute;left:74.40px;top:493.20px" class="cls_016"><span class="cls_016"><input type="radio" id="black" name="race" value="black">Black or African-American</span></div>
+<div style="position:absolute;left:207.98px;top:493.20px" class="cls_016"><span class="cls_016"><input type="radio" id="asian" name="race" value="asian">Asian</span></div>
+<div style="position:absolute;left:252.15px;top:493.20px" class="cls_016"><span class="cls_016"><input type="radio" id="hawaiian" name="race" value="hawaiian">Native Hawaiian or other Pacific Islander</span></div>
+    <div style="position:absolute;left:440.52px;top:493.20px" class="cls_016"><span class="cls_016"><input type="radio" id="indian" name="race" value="indian">American Indian or Alaska Native</span></div> </form>
+<div style="position:absolute;left:18.00px;top:516.35px" class="cls_017"><span class="cls_017">Patient Insurance/Billing Information</span><span class="cls_008"><sup>Only completion of “Policyholder Name” and “Policyholder DOB” is necessary when</sup></span></div>
+<div style="position:absolute;left:249.32px;top:525.95px" class="cls_008"><span class="cls_008">attaching a copy of the front & back of primary and/or secondary insurance cards.</span></div>
+<div style="position:absolute;left:18.00px;top:540.47px" class="cls_009"><span class="cls_009">Does patient wish Exact Sciences to bill their insurance?</span></div>
+<div style="position:absolute;left:280.08px;top:540.48px" class="cls_009"><span class="cls_009"><form><input type="radio" id="bpy" name="bp" value="yes">Yes </span><span class="cls_011">(complete below)</span></div>
+    <div style="position:absolute;left:423.16px;top:540.48px" class="cls_009"><span class="cls_009"><input type="radio" id="bpn" name="bp" value="no">No </span><span class="cls_011">(patient will self-pay)</span></div> </form>
+<div style="position:absolute;left:18.00px;top:558.47px" class="cls_009"><span class="cls_009">Policyholder Name: <input style="font-family: Segoe UI" type="text" id="phn"  size="8"> Policyholder DOB: <input style="font-family: Segoe UI" type="text" id="policydob" size="8"> Relationship to patient:</span></div>
+<div style="position:absolute;left:450.26px;top:560.70px" class="cls_016"><span class="cls_016"> <form><input type="radio" id="self" name="rel" value="self">Self</span></div>
+<div style="position:absolute;left:500.99px;top:560.70px" class="cls_016"><span class="cls_016"><input type="radio" id="spouse" name="rel" value="spouse">Spouse</span></div>
+<div style="position:absolute;left:550.79px;top:560.48px" class="cls_016"><span class="cls_016"><input type="radio" id="other" name="rel" value="other">Other</span></div> </form>
+<div style="position:absolute;left:15.00px;top:581.47px" class="cls_009"><span class="cls_009">Primary Insurance Carrier: <input style="font-family: Segoe UI" type="text" id="pic" size="10"> Type:</span><span class="cls_016"><input type="radio" id="private" name="type" value="private"> Private <input type="radio" id="medicare" name="type" value="medicare">  Medicare  <input type="radio" id="medicareadvt" name="type" value="medicareadvt">    Medicare Advantage</span></div>
+<div style="position:absolute;left:490.49px;top:586.70px" class="cls_016"><span class="cls_016"><input type="radio" id="medicaid" name="type" value="medicaid">Medicaid<input type="radio" id="male" name="gender" value="male"> Tricare</span></div>
+<div style="position:absolute;left:18.00px;top:605.48px" class="cls_009"><span class="cls_009">Claims Submission Address:<input style="font-family: Segoe UI" type="text" id="csa" size="65"></span></div>
+<div style="position:absolute;left:18.00px;top:626.47px" class="cls_009"><span class="cls_009">Subscriber ID/Policy Number: <input style="font-family: Segoe UI; font-size: 10" type="text" id="sid" size="13"> Group Number:<input style="font-family: Segoe UI; font-size: 10" type="text" id="gpn" size="13"> Plan: <input style="font-family: Segoe UI; font-size: 10" type="text" id="plan" size="12.5"></span></div>
+<div style="position:absolute;left:18.00px;top:646.47px" class="cls_009"><span class="cls_009">Prior-Authorization Code </span><span class="cls_011">(if available)</span><span class="cls_009">: <input style="font-family: Segoe UI; font-size: 10" type="text" id="pac" size="28"></span></div>
+<div style="position:absolute;left:18.00px;top:669.60px" class="cls_004"><span class="cls_004">PATIENT AUTHORIZATIONS, ASSIGNMENT OF BENEFITS (AOB) & FINANCIAL RESPONSIBILITIES</span></div>
+<div style="position:absolute;left:18.00px;top:683.80px" class="cls_018"><span class="cls_018">I authorize Exact Sciences Laboratories (Exact) to bill my insurance/health plan and furnish them with my Cologuard order information, test results, or other information requested</span></div>
+<div style="position:absolute;left:18.00px;top:691.60px" class="cls_018"><span class="cls_018">for reimbursement. I assign all rights and benefits under my insurance plans to Exact and authorize Exact to appeal and contest any reimbursement denial, including in any</span></div>
+<div style="position:absolute;left:18.00px;top:699.40px" class="cls_018"><span class="cls_018">administrative or civil proceedings necessary to pursue reimbursement. I authorize all reimbursements to be paid directly to the laboratory in consideration for services performed.</span></div>
+<div style="position:absolute;left:18.00px;top:707.20px" class="cls_018"><span class="cls_018">I understand that I am responsible for any amount not paid, including amounts for non-covered services or services determined by my plan to be provided by an out-of-network</span></div>
+<div style="position:absolute;left:18.00px;top:715.00px" class="cls_018"><span class="cls_018">provider. I further understand that if I am a Medicaid enrollee in a state where Exact is enrolled as a Medicaid provider, Exact will accept as payment in full the amounts paid by the</span></div>
+<div style="position:absolute;left:18.00px;top:723.00px" class="cls_018"><span class="cls_018">Medicaid program, plus any deductible, coinsurance or copayment which may be required by the Medicaid program to be paid by me.</span></div>
+<div style="position:absolute;left:18.00px;top:728.63px" class="cls_009"><span class="cls_009">Patient Signature: <input style="font-family: Segoe UI" type="text" id="pin" name="pin" size="22">  Date: <input style="font-family: Segoe UI Semibold" type="text" id="dat"  size="23"></span></div>
+<div style="position:absolute;left:463.12px;top:756.35px" class="cls_006"><span class="cls_006">For Lab Use Only</span></div>
+<div style="position:absolute;left:13.50px;top:763.92px" class="cls_022"><span class="cls_022">FRM-3004-05-c</span></div>
+<div style="position:absolute;left:115.54px;top:759.70px" class="cls_019"><span class="cls_019">Fax completed form to 844-870-8875</span></div>
+<div style="position:absolute;left:393.12px;top:768.14px" class="cls_021"><span class="cls_021">Sample Collected: __ /__ /_____</span></div>
+<div style="position:absolute;left:497.74px;top:768.14px" class="cls_021"><span class="cls_021">Sample Received: __ /__ /_____</span></div>
+<div style="position:absolute;left:13.50px;top:770.92px" class="cls_022"><span class="cls_022">February 2019</span></div>
+</div> 
+    
+</script>
+
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+    
+     <script>
+        var userid;
+         var response =  sessionStorage.getItem("jsonresponse");
+         
+         
+         
+    $.getJSON(response, function(data) {
+        
+        console.log(data);
+        console.log(data.ba);
+        var myJSON = JSON.stringify(data);
+        
+        
+       var hon=data.hon;
+      document.getElementById("hon").value=hon;
+        
+        
+        
+        
+        
+        
+        var pn=data.pn;
+      document.getElementById("pn").value=pn;
+       
+      
+      var npi=data.npi;
+      document.getElementById("npi").value=npi;
+       
+      var la=data.la;
+      document.getElementById("la").value=la;
+        
+      var csz1=data.csz1;
+      document.getElementById("csz1").value=csz1;
+      
+        var ph =data.ph;
+      document.getElementById("ph").value=ph;
+       
+         var sfn =data.sfn;
+      document.getElementById("sfn").value=sfn;
+       
+         var mrn =data.mrn;
+        userid = mrn;
+      document.getElementById("mrn").value=mrn;
+       
+       var fn =data.fn;
+      document.getElementById("fn").value=fn;
+       
+       var ln =data.ln;
+      document.getElementById("ln").value=ln;
+       
+        var dob =data.dob;
+      document.getElementById("dob").value=dob;
+       
+        var sex =data.sex;
+       
+       if(sex=="male")
+       {
+          document.getElementById("m").checked = true;
+       }
+       else
+       {
+          document.getElementById("f").checked = true;
+       }
+       
+        var sa =data.sa;
+      document.getElementById("sa").value=sa;
+       
+         var csz2=data.csz2;
+      document.getElementById("csz2").value=csz2;
+       
+       var phr=data.phr;
+      document.getElementById("phr").value=phr;
+       
+           
+        var phrr=data.phrr;
+       //console.log(phrr)
+
+       if(phrr=="home")
+           {
+        document.getElementById("home").checked = true;
+           }
+       else if(phrr=="mobile"){
+           document.getElementById("mobile").checked = true;
+       }
+        
+        else if(phrr=="work"){
+           document.getElementById("work").checked = true;
+       } 
+       
+         var lp=data.lp;
+      document.getElementById("lp").value=lp;
+       
+         var ba=data.ba;
+      document.getElementById("ba").value=ba;
+       
+         var csz3=data.csz3;
+      document.getElementById("csz3").value=csz3;;
+       
+       var descent =data.descent;
+       
+       if(descent=="yes")
+           {
+        document.getElementById("y").checked = true;
+           }
+       else{
+           document.getElementById("n").checked = true;
+       }
+       
+     
+       
+        var race=data.race;
+
+       if(race=="white")
+           {
+        document.getElementById("white").checked = true;
+           }
+       else if(race=="black"){
+           document.getElementById("black").checked = true;
+       }
+        
+        else if(race=="asian"){
+           document.getElementById("asian").checked = true;
+       } 
+       else if(race=="hawaiian"){
+           document.getElementById("hawaiian").checked = true;
+       } 
+       else if(race=="indian"){
+           document.getElementById("indian").checked = true;
+       } 
+       
+       
+       
+        var billpay =data.billpay;
+       
+       if(billpay=="yes")
+           { 
+        document.getElementById("bpy").checked = true;
+           }
+       else{
+           document.getElementById("bpn").checked = true;
+       }
+       
+       
+       
+        var phn=data.phn;
+      document.getElementById("phn").value=phn;
+       
+         var policydob=data.policydob;
+      document.getElementById("policydob").value=policydob;
+       
+       
+       
+       
+        var rel=data.rel;
+       //console.log(phrr)
+
+       if(rel=="self")
+           {
+        document.getElementById("self").checked = true;
+           }
+       else if(rel=="spouse"){
+           document.getElementById("spouse").checked = true;
+       }
+        
+        else if(rel=="other"){
+           document.getElementById("other").checked = true;
+       } 
+       
+       
+       var pic=data.pic;
+      document.getElementById("pic").value=pic;
+       
+       
+       
+       
+       
+               var type=data.type;
+       //console.log(phrr)
+
+       if(type=="private")
+           {
+        document.getElementById("private").checked = true;
+           }
+       else if(type=="medicare"){
+           document.getElementById("medicare").checked = true;
+       }
+        
+        else if(type=="medicareadvt"){
+           document.getElementById("medicareadvt").checked = true;
+       } 
+       else if(type=="medicaid"){
+           document.getElementById("medicaid").checked = true;
+       } 
+       else if(type=="tricare"){
+           document.getElementById("tricare").checked = true;
+       }
+       
+       
+              
+       var csa=data.csa;
+      document.getElementById("csa").value=csa;
+       
+       
+          var sid=data.sid;
+      document.getElementById("sid").value=sid;
+       
+          var gpn=data.gpn;
+      document.getElementById("gpn").value=gpn;
+       
+              
+       var plan=data.plan;
+      document.getElementById("plan").value=plan;
+       
+        var pac=data.pac;
+      document.getElementById("pac").value=pac;
+       
+       
+        var icd=data.icd;
+       //console.log(phrr)
+
+       if(icd=="z12")
+           {
+        document.getElementById("z12").checked = true;
+           }
+       else if(icd=="other"){
+           document.getElementById("other").checked = true;
+       }
+       
+       
+         var oth=data.oth;
+      document.getElementById("oth").value=oth;
+       
+             var doo=data.doo;
+      document.getElementById("doo").value=doo;
+       
+        var dat=data.dat;
+      document.getElementById("dat").value=dat;
+        
+        
+        
+        
+        
+        
+        
+        
+      sessionStorage.setItem("jsonresponse", myJSON);
+        
+        $(".mypanel").html(text);
+    });  
+
+function exportJson(el) {
+
+    var obj = {
+        'Healthcare Organization Name': document.value=document.getElementById("hon").value,
+        'Provider Name': document.value=document.getElementById("pn").value,
+        'NPI #': document.value=document.getElementById("npi").value,
+        'Other(s)': document.value=document.getElementById("oth").value,
+        'Location Address': document.value=document.getElementById("la").value,
+        'City, State, Zip(Provider)': document.value=document.getElementById("csz1").value,
+        'Phone Number': document.value=document.getElementById("ph").value,
+        'Secure Fax Number': document.value=document.getElementById("sfn").value,
+        'Patient ID/MRN': document.value=document.getElementById("mrn").value,
+        'First Name': document.value=document.getElementById("fn").value,
+        'Language Preference (optional)': document.value=document.getElementById("lp").value,
+        'City, State, Zip(Patient Shipping Address)': document.value=document.getElementById("csz2").value,
+        'Policyholder Name': document.value=document.getElementById("phn").value,
+        'Primary Insurance Carrier': document.value=document.getElementById("pic").value,
+        'Claims Submission Address': document.value=document.getElementById("csa").value,
+        'Subscriber ID/Policy Number': document.value=document.getElementById("sid").value,
+        'Prior-Authorization Code (if available)': document.value=document.getElementById("pac").value,
+        'Shipping Address': document.value=document.getElementById("sa").value,
+        'Phone Number (required)': document.value=document.getElementById("phr").value,
+        'Date of Order': document.value=document.getElementById("doo").value,
+        'ICD-10 Code': document.value=iccd(),
+        'Relationship to patient': document.value=re(),
+        'Origin': document.value=des(),
+        'Race': document.value=rac(),
+        'Pay Insurance': document.value=bpp(),
+        'Type': document.value=ty(),
+        'Sex': document.value=sex(),
+        'Billing Address': document.value=document.getElementById("ba").value,
+        'Policyholder DOB': document.value=document.getElementById("policydob").value,
+        'Last Name': document.value=document.getElementById("ln").value,
+        'City, State, Zip(Patient Billing Address)': document.value=document.getElementById("csz3").value,
+        'Group Number': document.value=document.getElementById("gpn").value,
+        'Plan': document.value=document.getElementById("plan").value,
+        'Date': document.value=document.getElementById("dat").value,
+        'DOB (mm/dd/yyyy)': document.value=document.getElementById("dob").value,
+        'Contact type': document.value=phoneno(),
+    };
+    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+    // what to return in order to show download window?
+
+    el.setAttribute("href", "data:"+data);
+    el.setAttribute("download", "ocr-response.json");
+    
+}         
+         
+         
+         
+//         
+//var userno1 = sessionStorage.getItem("id");;
+////console.log(userno1);
+//    
+//  var database = firebase.database();
+//                    
+//  var data = database.ref(userno1);
+//   data.on('value', function(snapshot) {
+//      
+//    //  console.log(snapshot.val().npi);
+//    
+//
+//       var hon=resp.hon;
+//      document.getElementById("hon").value=hon;
+//       
+//        console.log("hon");
+//       console.log(hon);
+       
+//        var pn=resp.pn;
+//      document.getElementById("pn").value=pn;
+//       
+//      
+//      var npi=resp.npi;
+//      document.getElementById("npi").value=npi;
+//       
+//      var la=resp.la;
+//      document.getElementById("la").value=la;
+//        
+//      var csz1=resp.csz1;
+//      document.getElementById("csz1").value=csz1;
+//      
+//        var ph =resp.ph;
+//      document.getElementById("ph").value=ph;
+//       
+//         var sfn =resp.sfn;
+//      document.getElementById("sfn").value=sfn;
+//       
+//         var mrn =resp.mrn;
+//      document.getElementById("mrn").value=mrn;
+//       
+//       var fn =resp.fn;
+//      document.getElementById("fn").value=fn;
+//       
+//       var ln =resp.ln;
+//      document.getElementById("ln").value=ln;
+//       
+//        var dob =resp.dob;
+//      document.getElementById("dob").value=dob;
+//       
+//        var sex =snapshot.val().sex;
+//       
+//       if(sex=="male")
+//           {
+//        document.getElementById("m").checked = true;
+//           }
+//       else{
+//           document.getElementById("f").checked = true;
+//       }
+//       
+//        var sa =resp.sa;
+//      document.getElementById("sa").value=sa;
+//       
+//         var csz2=resp.csz2;
+//      document.getElementById("csz2").value=csz2;
+//       
+//       var phr=resp.phr;
+//      document.getElementById("phr").value=phr;
+//       
+//           
+//        var phrr=resp.phrr;
+//       //console.log(phrr)
+//
+//       if(phrr=="home")
+//           {
+//        document.getElementById("home").checked = true;
+//           }
+//       else if(phrr=="mobile"){
+//           document.getElementById("mobile").checked = true;
+//       }
+//        
+//        else if(phrr=="work"){
+//           document.getElementById("work").checked = true;
+//       } 
+//       
+//         var lp=resp.lp;
+//      document.getElementById("lp").value=lp;
+//       
+//         var ba=resp.ba;
+//      document.getElementById("ba").value=ba;
+//       
+//         var csz3=resp.csz3;
+//      document.getElementById("csz3").value=csz3;;
+//       
+//       var descent =resp.descent;
+//       
+//       if(descent=="yes")
+//           {
+//        document.getElementById("y").checked = true;
+//           }
+//       else{
+//           document.getElementById("n").checked = true;
+//       }
+//       
+//     
+//       
+//        var race=resp.race;
+//       //console.log(phrr)
+//
+//       if(race=="white")
+//           {
+//        document.getElementById("white").checked = true;
+//           }
+//       else if(race=="black"){
+//           document.getElementById("black").checked = true;
+//       }
+//        
+//        else if(race=="asian"){
+//           document.getElementById("asian").checked = true;
+//       } 
+//       else if(race=="hawaiian"){
+//           document.getElementById("hawaiian").checked = true;
+//       } 
+//       else if(race=="indian"){
+//           document.getElementById("indian").checked = true;
+//       } 
+//       
+//       
+//       
+//        var billpay =resp.billpay;
+//       
+//       if(billpay=="yes")
+//           { 
+//        document.getElementById("bpy").checked = true;
+//           }
+//       else{
+//           document.getElementById("bpn").checked = true;
+//       }
+//       
+//       
+//       
+//        var policyn=resp.policyn;
+//      document.getElementById("policyn").value=policyn;
+//       
+//         var policydob=resp.policydob;
+//      document.getElementById("policydob").value=policydob;
+//       
+//       
+//       
+//       
+//        var rel=resp.rel;
+//       //console.log(phrr)
+//
+//       if(rel=="self")
+//           {
+//        document.getElementById("self").checked = true;
+//           }
+//       else if(rel=="spouse"){
+//           document.getElementById("spouse").checked = true;
+//       }
+//        
+//        else if(rel=="other"){
+//           document.getElementById("other").checked = true;
+//       } 
+//       
+//       
+//       var pic=resp.pic;
+//      document.getElementById("pic").value=pic;
+//       
+//       
+//       
+//       
+//       
+//               var type=resp.type;
+//       //console.log(phrr)
+//
+//       if(type=="private")
+//           {
+//        document.getElementById("private").checked = true;
+//           }
+//       else if(type=="medicare"){
+//           document.getElementById("medicare").checked = true;
+//       }
+//        
+//        else if(type=="medicareadvt"){
+//           document.getElementById("medicareadvt").checked = true;
+//       } 
+//       else if(type=="medicaid"){
+//           document.getElementById("medicaid").checked = true;
+//       } 
+//       else if(type=="tricare"){
+//           document.getElementById("tricare").checked = true;
+//       }
+//       
+//       
+//              
+//       var csa=resp.csa;
+//      document.getElementById("csa").value=csa;
+//       
+//       
+//          var sid=resp.sid;
+//      document.getElementById("sid").value=sid;
+//       
+//          var gpn=resp.gpn;
+//      document.getElementById("gpn").value=gpn;
+//       
+//              
+//       var plan=resp.plan;
+//      document.getElementById("plan").value=plan;
+//       
+//        var pac=resp.pac;
+//      document.getElementById("pac").value=pac;
+//       
+//       
+//        var icd=resp.icd;
+//       //console.log(phrr)
+//
+//       if(icd=="z12")
+//           {
+//        document.getElementById("z12").checked = true;
+//           }
+//       else if(icd=="other"){
+//           document.getElementById("other").checked = true;
+//       }
+//       
+//       
+//         var oth=resp.oth;
+//      document.getElementById("oth").value=oth;
+//       
+//             var doo=resp.doo;
+//      document.getElementById("doo").value=doo;
+//       
+//        var dat=resp.dat;
+//      document.getElementById("dat").value=dat;
+//               
+//        });
+                </script>
+    
+ 
+  <div class="container">
+      <br></br><br></br>
+ <button class="btn" type="button" onclick="Cancel()">Cancel</button>
+</div>
+
+ <div class="container">
+      <br></br><br></br>
+  <button class="btn" onclick="Sub()">Submit</button>
+</div>   
+
+<div class="container">
+        <br></br><br></br>
+<a id="exportJSON" onclick="exportJson(this);" class="btn" style="font-family: Arial; font-size: 16px">Export JSON</a>
+</div>
+
+
+
+<script> 
+function Cancel(){
+  var r = confirm("Are you sure you want to cancel?");
+  if (r == true) {
+    window.open("Uploading files.html", "_self");
+  } 
+    
+}
+
+</script>
+
+
+
+
+
+<script> 
+function Sub(){
+  var r = confirm("Are you sure you want to submit?");
+  if (r == true) {
+      
+var uids= (document.getElementById("mrn").value);
+      console.log(uids);
+      
+  firebase.database().ref(uids+"/").update({
+  
+    ba: document.value=document.getElementById("ba").value,
+    
+    billpay: document.value=bpp(),   
+       
+    csa: document.value=document.getElementById("csa").value,  
+    csz1: document.value=document.getElementById("csz1").value,  
+       
+    csz2: document.value=document.getElementById("csz2").value,
+       
+    csz3: document.value=document.getElementById("csz3").value,   
+       
+    dat: document.value=document.getElementById("dat").value,
+       
+       descent: document.value=des(),
+       
+       dob: document.value=document.getElementById("dob").value,
+       
+       doo: document.value=document.getElementById("doo").value,
+       
+       fn: document.value=document.getElementById("fn").value,
+       
+       gpn: document.value=document.getElementById("gpn").value,
+       
+       hon: document.value=document.getElementById("hon").value,
+       
+       icd: document.value=iccd(),
+       
+       la: document.value=document.getElementById("la").value,
+       
+       ln: document.value=document.getElementById("ln").value,
+       
+       lp: document.value=document.getElementById("lp").value,
+       
+       mrn: document.value=document.getElementById("mrn").value,
+       
+       npi: document.value=document.getElementById("npi").value,
+       
+       oth: document.value=document.getElementById("oth").value,
+       
+       pac: document.value=document.getElementById("pac").value,
+       
+       ph: document.value=document.getElementById("ph").value,
+       
+       phr: document.value=document.getElementById("phr").value,
+       
+       phrr: document.value=phoneno(),
+       
+       pic: document.value=document.getElementById("pic").value,
+       
+       plan: document.value=document.getElementById("plan").value,
+       
+       pn: document.value=document.getElementById("pn").value,
+       
+       policydob: document.value=document.getElementById("policydob").value,
+       
+       policyn: document.value=document.getElementById("phn").value,
+       
+       race: document.value=rac(),
+       
+       rel: document.value=re(),
+       
+       sa: document.value=document.getElementById("sa").value,
+       
+       sex: document.value=sex(),
+       
+       sfn: document.value=document.getElementById("sfn").value,
+       
+       sid: document.value=document.getElementById("sid").value,
+       
+       type: document.value=ty(),
+   
+  }); 
+        
+      
+      
+      
+      
+  alert("The form was submitted successfully. Patient ID:"+uids);   
+      
+  setTimeout(function(){ alert("Redirecting to upload page..."); 
+                       window.open("Uploading files.html", "_self"); }, 3000);
+//      
+//   window.open("Uploading files.html", "_self");   
+    
+  }   
+
+    
+}
+
+</script>
+
+<script>
+   function sex() { 
+       var val;
+            var ele = document.getElementsByName("sex"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   }
+    
+    
+      function ty() { 
+       var val;
+            var ele = document.getElementsByName("type"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   } 
+    
+    
+          function re() { 
+       var val;
+            var ele = document.getElementsByName("rel"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   }
+    
+          function bpp() { 
+       var val;
+            var ele = document.getElementsByName("bp"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   }
+    
+    
+         function rac() { 
+       var val;
+            var ele = document.getElementsByName("race"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   }
+    
+          function des() { 
+       var val;
+            var ele = document.getElementsByName("yn"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   }
+    
+    
+        function phoneno() { 
+       var val;
+            var ele = document.getElementsByName("phrr"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   }
+    
+    
+       function iccd() { 
+       var val;
+            var ele = document.getElementsByName("icd"); 
+              
+            for(i = 0; i < ele.length; i++) { 
+                if(ele[i].checked) 
+               val= ele[i].value; 
+            }
+       return val;
+   }
+</script>
+
+
+
+<script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 5000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script>
+
+
+</body>
+</html>

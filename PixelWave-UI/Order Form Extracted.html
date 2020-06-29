@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+/* Center the loader */
+#loader {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  z-index: 1;
+  width: 150px;
+  height: 150px;
+  margin: -75px 0 0 -75px;
+  border: 16px solid #f3f3f3;
+  border-radius: 50%;
+  border-top: 16px solid #827ffe;
+  width: 120px;
+  height: 120px;
+  -webkit-animation: spin 2s linear infinite;
+  animation: spin 2s linear infinite;
+}
+
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Add animation to "page content" */
+.animate-bottom {
+  position: relative;
+  -webkit-animation-name: animatebottom;
+  -webkit-animation-duration: 1s;
+  animation-name: animatebottom;
+  animation-duration: 1s
+}
+
+@-webkit-keyframes animatebottom {
+  from { bottom:-100px; opacity:0 } 
+  to { bottom:0px; opacity:1 }
+}
+
+@keyframes animatebottom { 
+  from{ bottom:-100px; opacity:0 } 
+  to{ bottom:0; opacity:1 }
+}
+
+#myDiv {
+  display: none;
+  text-align: center;
+}
+</style>
+    
+	<title>PixelWave</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->	
+	<link rel="icon" type="image/png" href="exact sciences.png"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="fonts/Linearicons-Free-v1.0.0/icon-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animate/animate.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="vendor/select2/select2.min.css">
+<!--===============================================================================================-->	
+	<link rel="stylesheet" type="text/css" href="vendor/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="css/util.css">
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<!--===============================================================================================-->
+</head>
+    
+     <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <!-- import the real time database SDK -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-database.js"></script>
+    
+      
+      <script>
+const firebaseConfig = {
+ apiKey: "AIzaSyB6QldxJGAfyNeo-Ql7aXXcEKl1rz1LwS4",
+  authDomain: "ocr-hack-v0.firebaseapp.com",
+  databaseURL: "https://ocr-hack-v0.firebaseio.com",
+  projectId: "ocr-hack-v0",
+  storageBucket: "ocr-hack-v0.appspot.com",
+  messagingSenderId: "860184810119",
+  appId: "1:860184810119:web:8e188783b7a4644d02de22",
+  measurementId: "G-8M2FNH93GQ"
+};
+// Initialize Firebase
+firebase.initializeApp(firebaseConfig);
+      </script>
+    
+    
+<body onload="myFunction()" style="margin:0;">
+    
+<div id="loader"></div>
+
+<div style="display:none;" id="myDiv" class="animate-bottom">
+    
+	<img src="exact sciences.png" height="80" width="150">
+	<div class="limiter">
+		<div class="container-login100">
+			<div class="wrap-login100 p-t-50 p-b-90">
+		
+                
+                <span class="login100-form-title p-b-51">
+						Cologuard Order
+					</span>
+                
+<!--
+               
+			provider info		
+          
+-->
+                     <center><h5> <b>Information Needed </b></h5> </center><br>
+                    
+  <label for="hname">Cologuard Oder Number:</label>
+<!--  <input class="input100"  type="text" id="hname">-->
+ 
+                <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="con">
+						<span class="focus-input100"></span>
+					</div>       
+                    
+                
+  <label for="pname">Date Received by ES Labs:</label>
+   <div class="wrap-input100 validate-input m-b-16" >
+						<input class="input100" type="text" id="drbel">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+                    <label for="npi">Health Organization Name:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hon">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+                       <label for="location">Provider Name:</label>
+   <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pn">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+                    <label for="csz">Provider NPI:</label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pnpi">
+						<span class="focus-input100"></span>
+					</div>  
+                    
+                    <label for="ph">ICD-10 Codes Z12.11 and Z12.12: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="icd">
+						<span class="focus-input100"></span>
+					</div>  
+                    
+                
+                    <label for="sfn">Patient Name:</label>
+   <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="ppn">
+						<span class="focus-input100"></span>
+					</div>  
+   
+                
+                
+
+ 
+              <label for="csz">Patient Date of Birth: </label> 
+<div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="ppdob">
+						<span class="focus-input100"></span>
+					</div> 
+    
+
+            
+                <label for="csz">Patient Sex:</label> 
+          <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pps">
+						<span class="focus-input100"></span>
+					</div> 
+            
+            <label for="csz">Patient Phone Number: </label> 
+                <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pppn">
+						<span class="focus-input100"></span>
+					</div> 
+                
+<!--
+                
+      Patient Demographics     
+                
+                
+-->
+                
+                
+      
+  <label for="hname">Patient Shipping Address:</label>
+   <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="ppsa">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                <label for="ph">Please Confirm Secure Fax #: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="pcsf">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                
+                <label for="ph">Healthcare Provider Signature: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hps">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                    
+  <label for="pname">Insurance Type:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="it">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                    
+                    <label for="npi"> Insurance Carrier Name: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="icn">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                    
+                       <label for="location">Subscriber ID:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="sid">
+						<span class="focus-input100"></span>
+					</div>  
+                
+     
+                    
+                    <label for="ph">Group Number: </label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="gpn">
+						<span class="focus-input100"></span>
+					</div>  
+                    
+                
+                
+             <label for="csz">Policy Owner/Holder Name:</label>
+ <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hn">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                
+                
+                
+                <label for="ph">Policy Owner/Holder Date of Birth: </label>
+  <div class="wrap-input100 validate-input m-b-16">
+						<input class="input100" type="text" id="hndob">
+						<span class="focus-input100"></span>
+					</div>  
+                
+                    
+         <p> Sincerely, <br> Exact Sciences Laboratories.</p>
+                
+                <div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn" type="button" onclick="Cancel()">
+							Cancel
+						</button>
+					</div>
+
+                
+					<div class="container-login100-form-btn m-t-17">
+						<button class="login100-form-btn" onclick="Sub()">
+							Submit
+						</button>
+					</div>
+                
+<div class="container-login100-form-btn m-t-17">
+  <button class="login100-form-btn">  
+<a id="exportJSON" onclick="exportJson(this);" lass="login100-form-btn"><b>Export JSON </b></a> </button> 
+</div>       	
+				
+			</div>
+		</div>
+
+	</div>
+
+
+    </div>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+                
+<!--
+             
+       // var orderno ="456";
+        
+//var orderno = sessionStorage.getItem("on");
+//console.log(userno1);
+        
+-->
+        
+        
+   <script src="https://code.jquery.com/jquery-1.12.4.min.js"> </script>
+
+    
+     <script>
+        var userid;
+         var response =  sessionStorage.getItem("orderjsonresponse");
+         
+         
+         
+    $.getJSON(response, function(data) {
+        
+        console.log(data);
+        var myJSON = JSON.stringify(data);
+        
+
+  
+        var con =data.con;
+      document.getElementById("con").value=con;
+       
+         var drbel =data.drbel;
+      document.getElementById("drbel").value=drbel;
+       
+          var gpn =data.gpn;
+      document.getElementById("gpn").value=gpn;
+       
+       var hn =data.hn;
+      document.getElementById("hn").value=hn;
+       
+       var hndob =data.hndob;
+      document.getElementById("hndob").value=hndob;
+       
+       var hon =data.hon;
+      document.getElementById("hon").value=hon;
+       
+       var hps =data.hps;
+      document.getElementById("hps").value=hps;
+       
+       var icn =data.icn;
+      document.getElementById("icn").value=icn;
+       
+         var icd =data.icd;
+      document.getElementById("icd").value=icd;
+       
+       var it =data.it;
+      document.getElementById("it").value=it;
+       
+       var pcsf =data.pcsf;
+      document.getElementById("pcsf").value=pcsf;
+       
+       var pn =data.pn;
+      document.getElementById("pn").value=pn;
+       
+       var pnpi =data.pnpi;
+      document.getElementById("pnpi").value=pnpi;
+       
+       var ppdob =data.ppdob;
+      document.getElementById("ppdob").value=ppdob;
+       
+       var ppn =data.ppn;
+      document.getElementById("ppn").value=ppn;
+       
+       var pppn =data.pppn;
+      document.getElementById("pppn").value=pppn;
+       
+       var pps =data.pps;
+      document.getElementById("pps").value=pps;
+       
+       var ppsa =data.ppsa;
+      document.getElementById("ppsa").value=ppsa;
+       
+       var sid =data.sid;
+      document.getElementById("sid").value=sid;
+        
+        
+
+        
+      sessionStorage.setItem("jsonresponse", myJSON);
+        
+        $(".mypanel").html(text);
+    });  
+    </script>
+ 
+                </script>
+    
+   <script>
+var myVar;
+
+function myFunction() {
+  myVar = setTimeout(showPage, 3000);
+}
+
+function showPage() {
+  document.getElementById("loader").style.display = "none";
+  document.getElementById("myDiv").style.display = "block";
+}
+</script> 
+    
+<script>
+	
+	
+	
+	
+	function exportJson(el) {
+
+    var obj = {
+    'Insurance Carrier Name': document.value=document.getElementById("icn").value,
+'Insurance Type': document.value=document.getElementById("it").value,
+'ICD-10 Codes': document.value=document.getElementById("icd").value,
+'Healthcare Provider Signature': document.value=document.getElementById("hps").value,
+'Cologuard Order Number': document.value=document.getElementById("con").value,
+'Date Received by ES Labs': document.value=document.getElementById("drbel").value,
+'Health Organization Name': document.value=document.getElementById("hon").value,
+'Provider Name': document.value=document.getElementById("pn").value,
+'Provider NPI': document.value=document.getElementById("pnpi").value,
+'Patient Name': document.value=document.getElementById("ppn").value,
+'Patient Date of Birth': document.value=document.getElementById("ppdob").value,
+'Patient Sex': document.value=document.getElementById("pps").value,
+'Patient Phone Number': document.value=document.getElementById("pppn").value,
+'Patient Shipping Address': document.value=document.getElementById("ppsa").value,
+'Please Confirm Secure Fax #': document.value=document.getElementById("pcsf").value,
+'Subscriber ID': document.value=document.getElementById("sid").value,
+'Group Number': document.value=document.getElementById("gpn").value,
+'Policy Owner/Holder Name': document.value=document.getElementById("hn").value,
+'Policy Owner/Holder Date of Birth': document.value=document.getElementById("hndob").value,
+    };
+    var data = "text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(obj));
+    // what to return in order to show download window?
+
+    el.setAttribute("href", "data:"+data);
+    el.setAttribute("download", "ocr-response.json");
+    
+}         
+       
+	
+	
+	
+	
+	
+	</script>
+    
+    
+    
+    
+    
+<script> 
+function Cancel(){
+  var r = confirm("Are you sure you want to cancel?");
+  if (r == true) {
+    window.open("Uploading files.html", "_self");
+  } 
+    
+}
+
+</script>
+
+
+
+
+
+<script> 
+function Sub(){
+  var r = confirm("Are you sure you want to submit?");
+  if (r == true) {
+      
+var uids= (document.getElementById("con").value);
+      console.log(uids);
+      
+  firebase.database().ref(uids+"/").update({
+  
+    con: document.value=document.getElementById("con").value,
+    
+      drbel: document.value=document.getElementById("drbel").value,
+      
+      hn: document.value=document.getElementById("hn").value,
+      
+      hndob: document.value=document.getElementById("hndob").value,
+      
+      hon: document.value=document.getElementById("hon").value,
+      
+      hps: document.value=document.getElementById("hps").value,
+      
+      icd: document.value=document.getElementById("icd").value,
+      
+      icn: document.value=document.getElementById("icn").value,
+      
+      it: document.value=document.getElementById("it").value,
+      
+      pcsf: document.value=document.getElementById("pcsf").value,
+      
+      pn: document.value=document.getElementById("pn").value,
+      
+      pnpi: document.value=document.getElementById("pnpi").value,
+      
+      ppdob: document.value=document.getElementById("ppdob").value,
+      
+      ppn: document.value=document.getElementById("ppn").value,
+      
+      con: document.value=document.getElementById("con").value,
+      
+      pppn: document.value=document.getElementById("pppn").value,
+      
+      pps: document.value=document.getElementById("pps").value,
+      
+      ppsa: document.value=document.getElementById("ppsa").value,
+      
+      sid: document.value=document.getElementById("sid").value,
+      
+    
+   
+  }); 
+        
+      
+      
+      
+      
+  alert("The form was submitted successfully. Order Number:"+uids);   
+      
+  setTimeout(function(){ alert("Redirecting to upload page..."); 
+                       window.open("Uploading files - Order Form.html", "_self"); }, 3000);
+//      
+//   window.open("Uploading files.html", "_self");   
+    
+  }   
+
+    
+}
+
+</script>
+
+    
+    
+    
+</body>
+</html>
