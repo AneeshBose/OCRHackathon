@@ -11,10 +11,10 @@ Password: admin
 
 ### Processing: Requisition Form: 
   -  To upload and process or view a patient’s requisition form, choose the **Form 1** option after logging in. 
-  -  In order to process a file, upload the file using 'Choose files' option and then hit'Upload file' (Supported file formats are .pdf, .jpg, .jpeg, .png, .tiff). 
+  -  In order to process a file, upload the file using **Choose files** option and then hit**Upload file** (Supported file formats are **.pdf, .jpg, .jpeg, .png, .tiff**). 
   -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page (please wait about 5 seconds for this to happen). 
-  -  If there are any corrections to be made, one can edit during this phase. After successfully making the required changes (incase of any discrepancy) hit on the submit button and then confirm the same. 
-  -  If you wish to export the response from our custom OCR API as a JSON, hit on 'Export JSON'. After successfully submitting the form, you will be redirected to the requisition form’s upload / search page.
+  -  If there are any corrections to be made, one can edit during this phase. After successfully making the required changes (incase of any discrepancy) hit on the **Submit** button and then confirm the same. 
+  -  If you wish to export the response from our custom OCR API as a JSON, hit on **Export JSON**. After successfully submitting the form, you will be redirected to the requisition form’s upload / search page.
   -  To search for a patient, use the patient ID or MRN as the primary key. While you are on the preview page, one can retrieve all the data on the form from the database.
 
 ### Processing: Information Needed Form: 
