@@ -31,11 +31,11 @@ Password: admin
  - API Hosting - Azure App Services
 
 ### Executing it locally:
-1) Pre-requisite:
+#### Pre-requisite:
 Python 3.x and pip needs to be installed.
 Install Poppler (Ref: https://pypi.org/project/pdf2image/) 
 
-2)  Setup:
+#### Setup:
 ```sh
 $ pip install -r requirment.txt
 ```
