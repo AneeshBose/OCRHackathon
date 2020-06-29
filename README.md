@@ -8,9 +8,9 @@ To login, use the username and password as admin.
 
 ##### Requisition Form: 
   -  To upload and process or view a patient’s requisition form, choose the “Form 1” option after logging in. 
-  -  In order to process a file, upload the using choose files option and then hit upload file [ Supported file formats are (.pdf, .jpg, .jpeg, .png, .tiff)]. 
-  -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page [please wait about 5 seconds for this to happen]. 
-  -  If there are any corrections to be made, one can edit during this phase. After successfully making the required changes [incase of any discrepancy] hit on the submit and then confirm the same. 
+  -  In order to process a file, upload the using choose files option and then hit upload file (Supported file formats are .pdf, .jpg, .jpeg, .png, .tiff). 
+  -  Once the upload is successful, you’ll be automatically redirected to the processed form’s page (please wait about 5 seconds for this to happen). 
+  -  If there are any corrections to be made, one can edit during this phase. After successfully making the required changes (incase of any discrepancy) hit on the submit and then confirm the same. 
   -  If you wish to export the JSON, hit on export JSON. After successfully submitting the form, you will be redirected to the requisition form’s upload / search page. 
   -  To make a successful submission, please make sure that all the fields are filled. 
   -  To search for a patient, use the patient ID or MRN as the primary key. While you are on the preview option any changes made to the form will not reflect on the database.
@@ -44,5 +44,7 @@ $ python app.py
 ##### To get json output use the following API endpoints:
   - Requisition form - localhost:8000/reqtform/<uuid_no>/0
   - Information Needed Form: localhost:8000/reqtform/<uuid_no>/1
-  - Where uuid is the file name.
-  - Please note internet connection would still be required for executing the Azure API.
+
+(Where uuid is the file name.)
+
+Please note internet connection would still be required for executing the Azure API.
