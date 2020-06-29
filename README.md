@@ -2,7 +2,7 @@
 
 This codebase contains submission of Exact Sciences OCR Hackathon
 
-### HomePage:https://ocr-hack-v0.web.app/
+### HomePage: [PixelWave OCR](https://ocr-hack-v0.web.app)
  
 To login, use the below default credentials:  
 Username: admin  
