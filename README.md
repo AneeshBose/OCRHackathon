@@ -49,5 +49,5 @@ $ python app.py
 #### To get json output use the following API endpoints:
 Open the below links in a browser after replacing <file_name> with the filename of the file to be tested.
   - **Requisition form** - localhost:8000/reqtform/<file_name>/0
-  - **Information Needed Form** - localhost:8000/reqtform/<file_name>/1
+  - **Information Needed Form** - localhost:8000/reqtform/<file_name>/1  
 Eg: To run OCR recognition in Information Needed form for filename as Sample.pdf, open browser with localhost:8000/reqtform/Sample.pdf/1
