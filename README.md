@@ -37,7 +37,7 @@ Password: admin
 
 #### Setup:
 ```sh
-$ pip install -r requirment.txt
+$ pip install -r requirement.txt
 ```
 #### Data:
 Maintain all the files to be tested in the same directory as app.py
