@@ -2,7 +2,7 @@ Flask==1.0
 Flask-SocketIO==2.9.1
 gunicorn==19.7.1
 MarkupSafe==1.0
-Pillow==7.1.0
+Pillow==8.2.0
 Werkzeug==0.15.3
 python-socketio==1.7.7
 python-engineio==3.12.1
