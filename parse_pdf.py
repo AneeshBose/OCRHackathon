@@ -286,13 +286,6 @@ def requisiton_page(images):
 			if not is_work:
 				is_work = validate_checkbox(line['text'], 'work')
 
-			'''
-			#sex male female
-			if not is_male:
-				is_male = validate_checkbox(line['text'], 'male')
-			if not is_female:
-				is_female = validate_checkbox(line['text'], 'female')
-			'''
 			#descent yes no
 			if not is_descent_yes:
 				is_descent_yes = validate_checkbox(line['text'], 'Yes')
