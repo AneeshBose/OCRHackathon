@@ -2,6 +2,12 @@
 
 This codebase contains submission of Exact Sciences OCR Hackathon
 
+### Objective: 
+To build a highly accurate OCR solution that takes a manually filled form as input through any electronic device and converts it to a digital form with minimal human dependency.
+
+### Build Target: 
+The tool should be able to automate the labor of manual data entry process and make it more inclusive by handling multiple languages and forms, even for the differently abled, so that everyone is able to get access to world-class healthcare facilities.
+
 ### HomePage: [PixelWave OCR](https://ocr-hack-v0.web.app)
 Visit: https://ocr-hack-v0.web.app
 
@@ -51,3 +57,9 @@ Open the below links in a browser after replacing <file_name> with the filename 
   - **Requisition form** - localhost:8000/reqtform/<file_name>/0
   - **Information Needed Form** - localhost:8000/reqtform/<file_name>/1  
 Eg: To run OCR recognition in Information Needed form for filename as Sample.pdf, open browser with localhost:8000/reqtform/Sample.pdf/1
+
+### Future Scope: 
+- Using AI to map addresses. Although we expect a higher accuracy, to improve the same, we also plan to use AI to make sure that incase of any mismatch/ wrongly recognized city name, state name etc. our application will auto correct the names and fasten the processing minimizing the human dependency to a much greater extent. 
+- Braille OCR and multi-lingual: OBR (Optical Braille Recognition) will be an added advantage to our platform that will recognizes Braille characters and converts to English language to accommodate a wider range of patients. Although we support only English, we will be able to support other international languages, as our API can be configured by simply accepting an additional parameter as the language. 
+- Ability to process multiple files parallelly [batch processing]. Currently our application takes approximately 8-10 seconds to process each file, with more computational power, we will be able to process multiple files at the same time. 
+- Support Multiple Formats: Currently our application supports 5 formats [PDF, JPEG, JPG, PNG, TIFF] and we look forward to scale up the supported formats. 5. Support Offline Processing: Currently the application depends on internet for analyzing and processing the form. We plan to make the processing offline so that the application can also work with minimum internet dependency.
