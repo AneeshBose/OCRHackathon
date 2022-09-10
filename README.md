@@ -34,7 +34,7 @@ Password: admin
  - **Framework** - Flask
  - **Database** - Firebase
  - **OCR** - PixelWave Custom Model + Microsoft Computer Vision Read API
- - **API Hosting** - Azure App Services
+ - **API Hosting** - Heroku
 
 ### Executing it locally:
 #### Pre-requisite:
